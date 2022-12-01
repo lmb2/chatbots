@@ -15,11 +15,11 @@ from tensorflow.keras.models import load_model
 
 nlp = spacy.load("en_core_web_lg")
 
-intents = json.loads(open('intents_big.json',encoding='utf8').read())
+intents = json.loads(open('data/intents_big.json',encoding='utf8').read())
 
-words = pickle.load(open('words_intents.pkl', 'rb'))
-classes = pickle.load(open('classes_intents.pkl', 'rb'))
-model = load_model('chatbotmodelintents.h5')
+words = pickle.load(open('data/words_intents.pkl', 'rb'))
+classes = pickle.load(open('data/classes_intents.pkl', 'rb'))
+model = load_model('data/chatbotmodelintents.h5')
 
 #Tag: (parameter_name,[entity_names_to_check_for])
 get_information_dict = {

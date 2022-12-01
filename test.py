@@ -43,17 +43,39 @@ QUANTITY:    Measurements, as of weight or distance.
 ORDINAL:     “first”, “second”, etc.
 CARDINAL:    Numerals that do not fall under another type.
 '''
-import spacy
+#import spacy
 #from spacy import displacy
 
-nlp = spacy.load("en_core_web_lg")
+#nlp = spacy.load("en_core_web_lg")
 
-text = 'Hello my name is Fabian'
-doc = nlp(text)
+#text = 'Do you know Hindi?'
+#doc = nlp(text)
 
-response = 'Hello <HUMAN>, nice to meet you!'
+#response = 'Hello <HUMAN>, nice to meet you!'
 
 #entities=[(i, i.label_) for i in doc.ents]
-entities=[(i, i.label_) for i in doc.ents if i.label_ in ['PERSON','ORG','NORP']]
-print(entities)
+#entities=[(i, i.label_) for i in doc.ents if i.label_ in ['PERSON','ORG','NORP']]
+#print(entities)
 #print(response.replace("<HUMAN>", str(entities[0][0])))
+
+import requests
+'''
+Wheather API Test
+'''
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather?id=524901&appid="
+API_KEY = open('data/api_key.txt','r').read()
+CITY = "Sonsbeck"
+
+url = BASE_URL + API_KEY + "&q=" + CITY + "&units=metric"
+
+response = requests.get(url).json()
+temp = response['main']['temp']
+temp_feels_like = response['main']['feels_like']
+humidity = response['main']['humidity']
+description = response['weather'][0]['description']
+
+print(f'''General Weather in {CITY}: {description}
+Temperature in {CITY}: {temp}°C
+feels like: {temp_feels_like}°C
+Humidity is: {humidity}%
+      ''')

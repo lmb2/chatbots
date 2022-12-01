@@ -17,7 +17,7 @@ from tensorflow.keras.optimizers import SGD
 
 nlp = spacy.load("en_core_web_lg")
 
-intents = json.loads(open('intents_big.json',encoding='utf8').read())
+intents = json.loads(open('data/intents_big.json',encoding='utf8').read())
 
 words = []
 classes = []
@@ -57,8 +57,8 @@ classes = sorted(set(classes))
 Erstellte Listen mit den Lemmatized Words speichern
 und den Klassen speichern
 '''
-pickle.dump(words, open('words_intents.pkl', 'wb'))
-pickle.dump(classes, open('classes_intents.pkl', 'wb'))
+pickle.dump(words, open('data/words_intents.pkl', 'wb'))
+pickle.dump(classes, open('data/classes_intents.pkl', 'wb'))
 
 '''
 Bag of words erstellen
@@ -111,4 +111,4 @@ sgd = SGD(lr=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size= 5, verbose=1)
-model.save('chatbotmodelintents.h5', hist)
+model.save('data/chatbotmodelintents.h5', hist)
