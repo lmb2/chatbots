@@ -633,12 +633,12 @@
     {
         "tag": "weather",
         "patterns": [
-            "temperature",
-            "weather",
-            "how hot is it"
+            "how is the temperature in Düsseldorf",
+            "how is the weather in Köln",
+            "how hot is it in Aachen"
         ],
         "responses": [
-            "..."
+            "Weather"
         ]
     },
     {

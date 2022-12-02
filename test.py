@@ -5,21 +5,26 @@ Created on Sat Nov 26 12:51:18 2022
 @author: Fabian
 """
 
-# import tasks
+import tasks
 
-# method_dir = {
-#     "Redirecting to Google...": "do_google_search",
-#     "Date and Time": "do_current_date_and_time"
-#               }
+task_dict = {
+    "Redirecting to Google...": "do_google_search",
+    "Date and Time": "do_current_date_and_time",
+    "Date": "do_current_date",
+    "Time": "do_current_time",
+    "Weather": "do_weather_in"
+              }
 
-# #function = globals()[method_dir.get("print")]
-# #function()
+#function = globals()[method_dir.get("print")]
+#function()
 
 
-# function_name = method_dir.get("Date and Time")
-# print(eval("tasks."+function_name + "()"))
+function_name = task_dict.get("Weather")
+city = "Köln"
+#function = eval("tasks."+function_name)
+#print(function(city))
 
-# print(method_dir.keys())
+#print(method_dir.keys())
 
 
 
@@ -48,7 +53,7 @@ CARDINAL:    Numerals that do not fall under another type.
 
 #nlp = spacy.load("en_core_web_lg")
 
-#text = 'Do you know Hindi?'
+#text = 'Do you know Rumeln?'
 #doc = nlp(text)
 
 #response = 'Hello <HUMAN>, nice to meet you!'
@@ -58,24 +63,26 @@ CARDINAL:    Numerals that do not fall under another type.
 #print(entities)
 #print(response.replace("<HUMAN>", str(entities[0][0])))
 
-import requests
-'''
-Wheather API Test
-'''
-BASE_URL = "https://api.openweathermap.org/data/2.5/weather?id=524901&appid="
-API_KEY = open('data/api_key.txt','r').read()
-CITY = "Sonsbeck"
+# import requests
+# '''
+# Wheather API Test
+# '''
+# BASE_URL = "https://api.openweathermap.org/data/2.5/weather?id=524901&appid="
+# API_KEY = open('data/api_key.txt','r').read()
+# CITY = "bdjbsdjbdjs387z3zabdsa"
 
-url = BASE_URL + API_KEY + "&q=" + CITY + "&units=metric"
+# url = BASE_URL + API_KEY + "&q=" + CITY + "&units=metric"
 
-response = requests.get(url).json()
-temp = response['main']['temp']
-temp_feels_like = response['main']['feels_like']
-humidity = response['main']['humidity']
-description = response['weather'][0]['description']
+# response = requests.get(url).json()
+# print(len(response))
 
-print(f'''General Weather in {CITY}: {description}
-Temperature in {CITY}: {temp}°C
-feels like: {temp_feels_like}°C
-Humidity is: {humidity}%
-      ''')
+# temp = response['main']['temp']
+# temp_feels_like = response['main']['feels_like']
+# humidity = response['main']['humidity']
+# description = response['weather'][0]['description']
+
+# print(f'''General Weather in {CITY}: {description}
+# Temperature in {CITY}: {temp}°C
+# feels like: {temp_feels_like}°C
+# Humidity is: {humidity}%
+#       ''')

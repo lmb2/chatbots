@@ -23,14 +23,16 @@ model = load_model('data/chatbotmodelintents.h5')
 
 #Tag: (parameter_name,[entity_names_to_check_for])
 get_information_dict = {
-    "courtesyGreetingResponse": ("<HUMAN>",["PERSON","ORG","NORP"])
+    "courtesyGreetingResponse": ("<HUMAN>",["PERSON","ORG","NORP"]),
+    "weather": ("<>",["PERSON","ORG","GPE","EVENT"])
     }
 #Response: function_name
 task_dict = {
     "Redirecting to Google...": "do_google_search",
     "Date and Time": "do_current_date_and_time",
     "Date": "do_current_date",
-    "Time": "do_current_time"
+    "Time": "do_current_time",
+    "Weather": "do_weather_in"
               }
 
 def clean_up_sentence(sentence):
@@ -87,7 +89,7 @@ def get_information(tag, message):
         return_value = "dontknow"
     else:
         return_value = str(entities[0][0])
-    
+    print(return_value)
     return return_value
     
 '''
@@ -107,6 +109,7 @@ def get_response(message):
             Prüfen ob der Tag aus dem Response bestimmt wurde Teil der Tags is in dem Parameter ausgetauscht werden
             Wenn ja -> über get_information Methode die Auszutauschenden Werte holen
                         -> vorher prüfen ob aus der Eingabe die entsprechenden Infos gewonne wurden, denn falls nicht
+                            -> andernfalls früfen ob funktionsaufruf existiert für den parameter gebraucht wird
                                 -> Default Antwort setzen
             '''
             if tag_of_highest_probability_from_predicted_classes in get_information_dict.keys():
@@ -114,16 +117,25 @@ def get_response(message):
                 change_parameter = get_information_dict.get(tag_of_highest_probability_from_predicted_classes)[0]
                 if to_change == "dontknow":
                     result = "I don't understand."
+                elif result in task_dict.keys():
+                    function_name = task_dict.get(result)
+                    function_call = eval("tasks."+function_name)
+                    result = function_call(to_change)
                 else:
                     result = result.replace(change_parameter,to_change)
                     
             '''
+            Prüfen ob !!!keine!!! Bedigung vorliegt das Informationen ausgelesen werden sollen
+                    -> um doppelt aufruf zu verhinden für den Fall:
+                        -> information auslese wird getriggert und zusätzlich methoden aufruf mit parameter
             Prüfen ob die Reponse ein Trigger im task_dict ist 
             falls ja -> aufrufen der entsprechenden Methode die den Task bearbeitetet 
             '''
-            if result in task_dict.keys():
-                function_name = task_dict.get(result)
-                result = eval("tasks."+function_name+"()")
+            if tag_of_highest_probability_from_predicted_classes not in get_information_dict.keys():
+                if result in task_dict.keys():
+                    function_name = task_dict.get(result)
+                    function_call = eval("tasks."+function_name)
+                    result = function_call()
             break
     return result
 
