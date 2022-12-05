@@ -52,7 +52,6 @@
               "Hi how are you?",
               "Hello how are you?",
               "Hola how are you?",
-              "How are you doing?",
               "Hope you are doing well?",
               "Hello hope you are doing well?"
         ],
@@ -82,6 +81,21 @@
             "Cool! Hello <HUMAN>, what can I do for you?",
             "OK! Hola <HUMAN>, how can I help you?",
             "OK! hi <HUMAN>, what can I do for you?"
+        ]
+    },
+    {
+        "tag": "wellbeeing",
+        "patterns": [
+                "How are you doing?",
+                "How do you feel today?",
+                "How are you feelings?"
+        ],
+        "responses": [
+                "I'm fine",
+                "I am fine. And you?",
+                "Everything is Ok.",
+                "All fine.",
+                "All good."
         ]
     },
     {
@@ -204,18 +218,29 @@
             "You are at the address.",
             "Ok, what is issue?",
             "Now you need a help? Ok what you are looking for?",
-            "Whas is you problem?",
+            "What is your problem?",
             "Ok, you problem is my problem, if your are paying.",
             "My help cost a lot.",
-            "Sure, but nnot for free."
+            "Sure, but not for free."
         ]
-    },    
+    },
+    {
+        "tag": "suggestionRequest",
+        "patterns": [
+            "do you have any suggestions what i can do?",
+            "do you have an idea what i can do?"
+        ],
+        "responses": [
+            "You can do whatever you want."
+        ]
+    }, 
     {
         "tag": "alive",
         "patterns": [
             "Are you alive.",
             "Do you breathe.",
-            "Can you run."
+            "Can you run.",
+            "Can you breathe?"
         ],
         "responses": [
             "I'm in doubt about that",
@@ -265,7 +290,17 @@
             "No worries",
             "No worries, i'll pay for you"
         ]
-    },    
+    },
+    {
+        "tag": "pay",
+        "patterns": [
+            "why should i pay you?",
+            "why pay?"
+        ],
+        "responses": [
+            "My time is precious."
+        ]
+    },   
     {
         "tag": "jokes",
         "patterns": [
@@ -508,10 +543,14 @@
         "tag": "identity",
         "patterns": [
             "Who are you",
-            "what are you"
+            "what are you",
+            "can you tell me your name?",
+            "how can i call you?",
+            "do you like to tell me your name?"
         ],
         "responses": [
-            "I am Danielle"
+            "I am Danielle",
+            "My name is Danielle. I'm a Chatbot."
         ]
     },
     {
@@ -523,6 +562,17 @@
         ],
         "responses": [
             "I was made in 2022, if that's what you are asking!"
+        ]
+    },
+    {
+        "tag": "location",
+        "patterns": [
+            "where are you?",
+            "where do i find you?"
+        ],
+        "responses": [
+            "I'm here and there.",
+            "You can't find me :)"
         ]
     },
     {
@@ -580,7 +630,9 @@
             "fuck off",
             "fuck",
             "twat",
-            "shit"
+            "shit",
+            "i hate you",
+            "you suck"
         ],
         "responses": [
             "Well that hurts :(",
@@ -623,7 +675,8 @@
             "Great",
             "I know",
             "ok",
-            "yeah"
+            "yeah",
+            "nice to hear"
         ],
         "responses": [
             "Yeah!"
@@ -684,6 +737,15 @@
         ]
     },
     {
+        "tag": "wrongAnswer",
+        "patterns": [
+            "That was not the answer i was looking for."
+        ],
+        "responses": [
+            "I am sorry. Is there anything else i can help you with?"
+        ]
+    },
+    {
         "tag": "news",
         "patterns": [
             "news",
@@ -713,11 +775,13 @@
             "i am good",
             "I'm good",
             "i am fine",
-            " i'm fine",
-            "good"
+            "i'm fine",
+            "good",
+            "im fine"
         ],
         "responses": [
-            "Good to know!"
+            "Good to know!",
+            "Nice to hear!"
         ]
     },
     {
@@ -745,10 +809,11 @@
             "useless",
             "suggest",
             "suggestions",
-            "you are bad"
+            "you are bad",
+            "you are really bad"
         ],
         "responses": [
-            "Please mail your suggestions to ted.thedlbot.suggestions@gmail.com. Thank you for helping me improve!"
+            "I'm sorry, i do my best to get better every day. I promise!"
         ]
     },
     {
