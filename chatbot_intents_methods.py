@@ -89,7 +89,7 @@ def get_information(tag, message):
         return_value = "dontknow"
     else:
         return_value = str(entities[0][0])
-    print(return_value)
+
     return return_value
     
 '''

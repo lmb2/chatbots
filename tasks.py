@@ -36,8 +36,8 @@ def do_weather_in(location):
         answer = f'''General Weather in {CITY}: {description}
         Temperature in {CITY}: {temp}°C
         feels like: {temp_feels_like}°C
-        Humidity is: {humidity}%
-              '''
+        Humidity is: {humidity}% 
+        '''
     else:
         answer = "Sorry, can't find location."
     return answer
