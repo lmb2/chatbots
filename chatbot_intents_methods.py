@@ -34,6 +34,7 @@ task_dict = {
     "Time": "do_current_time",
     "Weather": "do_weather_in"
               }
+latest_response_memory = []
 
 def clean_up_sentence(sentence):
     doc = nlp(sentence)
@@ -98,6 +99,7 @@ Herausfiltern der wahrscheinlichsten Response über die predict class
 Wählen einer zufälligen Antwort aus den möglichen Reponses
 '''
 def get_response(message):
+    global latest_response_memory
     predicted_class = predict_class(message)
     tag_of_highest_probability_from_predicted_classes = predicted_class[0]['intent']
     list_of_intents = intents['intents']
@@ -136,6 +138,10 @@ def get_response(message):
                     function_name = task_dict.get(result)
                     function_call = eval("tasks."+function_name)
                     result = function_call()
+                    
+            latest_response_memory.append(result)
+            if len(latest_response_memory) > 3:
+                latest_response_memory = list([entry for entry in latest_response_memory if latest_response_memory.index(entry) > 0])
             break
     return result
 
