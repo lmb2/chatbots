@@ -11,6 +11,18 @@
         ]
     },
     {
+        "tag": "wikipediaSearch",
+        "patterns": [
+            "can you tell me something about apples",
+            "do you know something about cars",
+            "get me some information for",
+            "get me some informaton about"
+        ],
+        "responses": [
+            "WikiSearch"
+        ]
+    },
+    {
         "tag": "greeting",
         "patterns": [
             "Hi",

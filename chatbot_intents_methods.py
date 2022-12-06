@@ -21,10 +21,12 @@ words = pickle.load(open('data/words_intents.pkl', 'rb'))
 classes = pickle.load(open('data/classes_intents.pkl', 'rb'))
 model = load_model('data/chatbotmodelintents.h5')
 
-#Tag: (parameter_name,[entity_names_to_check_for])
+#Tag: (<parameter_name_to_change>,[entity_names_to_check_for])
+#OR Tag:(trigger_word,[trigger_words_needed])
 get_information_dict = {
     "courtesyGreetingResponse": ("<HUMAN>",["PERSON","ORG","NORP"]),
-    "weather": ("<>",["PERSON","ORG","GPE","EVENT"])
+    "weather": ("<>",["PERSON","ORG","GPE","EVENT"]),
+    "wikipediaSearch": ("split",["about","for"])
     }
 #Response: function_name
 task_dict = {
@@ -32,7 +34,8 @@ task_dict = {
     "Date and Time": "do_current_date_and_time",
     "Date": "do_current_date",
     "Time": "do_current_time",
-    "Weather": "do_weather_in"
+    "Weather": "do_weather_in",
+    "WikiSearch": "do_wikipedia_search"
               }
 latest_response_memory = []
 
@@ -79,17 +82,27 @@ def predict_class(sentence):
 '''
 Methode zum herausfiltern von Konkreten informationen für die weiter Verwendung
 Bestimmt durch Angabe bestimmter Parameter
+Entweder ein Triggerword ist angegeben z.B. split -> mit zugehörigen Werten
+    -> dann wird der entsprechende Part in der Methode ausgeführt
+Oder es findet regulärer Aufruf statt, mit angabe der Entitys nach den Spacys suchen/filtern soll
 '''
 def get_information(tag, message):
-    entity_names_to_check_for = get_information_dict.get(tag)[1]
-    doc = nlp(message)
-    entities=[(i, i.label_) for i in doc.ents if i.label_ in entity_names_to_check_for]
-    #print(entities)
-    
-    if len(entities) == 0:
-        return_value = "dontknow"
+    if get_information_dict.get(tag)[0] == "split":
+        split_words_to_check_for = get_information_dict.get(tag)[1]
+        for splitWord in split_words_to_check_for:
+            if message.find(splitWord) != -1:
+                return_value = message.split(splitWord,1)[1]
+                break
     else:
-        return_value = str(entities[0][0])
+        entity_names_to_check_for = get_information_dict.get(tag)[1]
+        doc = nlp(message)
+        entities=[(i, i.label_) for i in doc.ents if i.label_ in entity_names_to_check_for]
+        #print(entities)
+        
+        if len(entities) == 0:
+            return_value = "dontknow"
+        else:
+            return_value = str(entities[0][0])
 
     return return_value
     
@@ -138,7 +151,9 @@ def get_response(message):
                     function_name = task_dict.get(result)
                     function_call = eval("tasks."+function_name)
                     result = function_call()
-                    
+            '''
+            Speichern der bestimmmten, gesendeten Response des Bots in eine Liste. Diese enthällt immer die letzten 3 Responses.
+            '''
             latest_response_memory.append(result)
             if len(latest_response_memory) > 3:
                 latest_response_memory = list([entry for entry in latest_response_memory if latest_response_memory.index(entry) > 0])

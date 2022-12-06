@@ -41,3 +41,6 @@ def do_weather_in(location):
     else:
         answer = "Sorry, can't find location."
     return answer
+
+def do_wikipedia_search(possibleTopics):
+    return possibleTopics
