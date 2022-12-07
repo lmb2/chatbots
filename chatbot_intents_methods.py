@@ -163,6 +163,7 @@ def get_response(message):
                     break
         else:
             result = "I think I misunderstood something."
+        safe_in_memory("TEST",result)#TO_FIX -> tag muss aus schleife übernommen werden zum speichern
     else:
         predicted_class = predict_class(message)
         tag_of_highest_probability_from_predicted_classes = predicted_class[0]['intent']
