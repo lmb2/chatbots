@@ -42,5 +42,10 @@ def do_weather_in(location):
         answer = "Sorry, can't find location."
     return answer
 
-def do_wikipedia_search(possibleTopics):
-    return possibleTopics
+def do_wikipedia_search(possibleTopics,splitted=True):
+    if splitted:
+        print("splitted")
+        return possibleTopics
+    else:
+        print("pureMessage")
+        return possibleTopics

@@ -85,7 +85,8 @@
               "Good thanks. I am Adam",
               "Im fine, thanks. My name is Adam",
               "Great thanks! My name is Bella",
-              "Great thanks. I am Bella"
+              "Great thanks. I am Bella",
+              "My name is Adam"
         ],
         "responses": [
             "Great! Hi <HUMAN>! How can I help?",
@@ -750,10 +751,18 @@
     {
         "tag": "wrongAnswer",
         "patterns": [
-            "That was not the answer i was looking for."
+            "That was not the answer i was looking for.",
+            "Thats not the topic i wanted."
         ],
         "responses": [
             "I am sorry. Is there anything else i can help you with?"
+        ]
+    },
+    {
+        "tag": "wrongAnswerResponse",
+        "patterns": [],
+        "responses": [
+            "I am sorry. What topic are you looking for?"
         ]
     },
     {

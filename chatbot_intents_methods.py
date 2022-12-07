@@ -37,6 +37,15 @@ task_dict = {
     "Weather": "do_weather_in",
     "WikiSearch": "do_wikipedia_search"
               }
+#Tag: (newResponseTag,[latestMemoryTagsTrigger])
+direct_response_dict = {
+    "wrongAnswer": ("wrongAnswerResponse",["wikipediaSearch"])
+    }
+#Tag: {Tag: response}
+direct_task_with_input = {
+    "wrongAnswerResponse": {"wikipediaSearch": "WikiSearch"}
+    }
+
 latest_response_memory = []
 
 def clean_up_sentence(sentence):
@@ -89,10 +98,13 @@ Oder es findet regulärer Aufruf statt, mit angabe der Entitys nach den Spacys s
 def get_information(tag, message):
     if get_information_dict.get(tag)[0] == "split":
         split_words_to_check_for = get_information_dict.get(tag)[1]
-        for splitWord in split_words_to_check_for:
-            if message.find(splitWord) != -1:
-                return_value = message.split(splitWord,1)[1]
-                break
+        message_words = clean_up_sentence(message)
+        for splitter in split_words_to_check_for:
+            for elem in message_words:
+                if splitter == elem:
+                    index_of_elem = message_words.index(elem)
+                    return_value = list(message_words)[index_of_elem+1:]
+                    break
     else:
         entity_names_to_check_for = get_information_dict.get(tag)[1]
         doc = nlp(message)
@@ -105,6 +117,30 @@ def get_information(tag, message):
             return_value = str(entities[0][0])
 
     return return_value
+
+'''
+Speichern der letzten Nachricht im Memory(Gedächtnis) des Bots
+-> wenn mehr als 3 gespeichert sind wird älteste gelöscht => immer nur 3 letzte Nachrichten vorhanden
+'''
+def safe_in_memory(tag,response):
+    global latest_response_memory
+    latest_response_memory.append((tag,response))
+    if len(latest_response_memory) > 3:
+        latest_response_memory = list([entry for entry in latest_response_memory if latest_response_memory.index(entry) > 0])
+        
+def get_last_memory_tag():
+    global latest_response_memory
+    if len(latest_response_memory)>0:
+        return latest_response_memory[-1][0]
+    else:
+        return 0
+
+def get_last_but_one_memory_tag():
+    global latest_response_memory
+    if len(latest_response_memory)>1:
+        return latest_response_memory[-2][0]
+    else:
+        return 0
     
 '''
 Antwort aus message bstimmen
@@ -112,52 +148,80 @@ Herausfiltern der wahrscheinlichsten Response über die predict class
 Wählen einer zufälligen Antwort aus den möglichen Reponses
 '''
 def get_response(message):
-    global latest_response_memory
-    predicted_class = predict_class(message)
-    tag_of_highest_probability_from_predicted_classes = predicted_class[0]['intent']
-    list_of_intents = intents['intents']
-    for i in list_of_intents:
-        if i['tag'] == tag_of_highest_probability_from_predicted_classes:
-            result = random.choice(i['responses'])
-            
-            '''
-            Prüfen ob der Tag aus dem Response bestimmt wurde Teil der Tags is in dem Parameter ausgetauscht werden
-            Wenn ja -> über get_information Methode die Auszutauschenden Werte holen
-                        -> vorher prüfen ob aus der Eingabe die entsprechenden Infos gewonne wurden, denn falls nicht
-                            -> andernfalls früfen ob funktionsaufruf existiert für den parameter gebraucht wird
-                                -> Default Antwort setzen
-            '''
-            if tag_of_highest_probability_from_predicted_classes in get_information_dict.keys():
-                to_change = get_information(tag_of_highest_probability_from_predicted_classes, message)
-                change_parameter = get_information_dict.get(tag_of_highest_probability_from_predicted_classes)[0]
-                if to_change == "dontknow":
-                    result = "I don't understand."
-                elif result in task_dict.keys():
-                    function_name = task_dict.get(result)
+    '''
+    Checken ob letzte gesendete Response Teil vom direct Response (Rückfragen des Bots) sind 
+    und vom direct task => aktuelle Message bezieht sich auf letzte Response des Bots und hat task aufruf 
+    '''
+    if get_last_memory_tag() != 0 and get_last_memory_tag() in direct_task_with_input.keys():
+        possible_actions = direct_task_with_input.get(get_last_memory_tag())
+        if get_last_but_one_memory_tag() in possible_actions.keys():
+            for entry in possible_actions.values():
+                if entry in task_dict.keys():
+                    function_name = task_dict.get(entry)
                     function_call = eval("tasks."+function_name)
-                    result = function_call(to_change)
-                else:
-                    result = result.replace(change_parameter,to_change)
-                    
-            '''
-            Prüfen ob !!!keine!!! Bedigung vorliegt das Informationen ausgelesen werden sollen
-                    -> um doppelt aufruf zu verhinden für den Fall:
-                        -> information auslese wird getriggert und zusätzlich methoden aufruf mit parameter
-            Prüfen ob die Reponse ein Trigger im task_dict ist 
-            falls ja -> aufrufen der entsprechenden Methode die den Task bearbeitetet 
-            '''
-            if tag_of_highest_probability_from_predicted_classes not in get_information_dict.keys():
-                if result in task_dict.keys():
-                    function_name = task_dict.get(result)
-                    function_call = eval("tasks."+function_name)
-                    result = function_call()
-            '''
-            Speichern der bestimmmten, gesendeten Response des Bots in eine Liste. Diese enthällt immer die letzten 3 Responses.
-            '''
-            latest_response_memory.append(result)
-            if len(latest_response_memory) > 3:
-                latest_response_memory = list([entry for entry in latest_response_memory if latest_response_memory.index(entry) > 0])
-            break
+                    result = function_call(message,False)
+                    break
+        else:
+            result = "I think I misunderstood something."
+    else:
+        predicted_class = predict_class(message)
+        tag_of_highest_probability_from_predicted_classes = predicted_class[0]['intent']
+        list_of_intents = intents['intents']            
+        for i in list_of_intents:
+            if i['tag'] == tag_of_highest_probability_from_predicted_classes:
+                result = random.choice(i['responses'])
+                
+                '''
+                Prüfen ob der Tag aus dem Response bestimmt wurde Teil der Tags is in dem Parameter ausgetauscht werden
+                Wenn ja -> über get_information Methode die Auszutauschenden Werte holen
+                            -> vorher prüfen ob aus der Eingabe die entsprechenden Infos gewonne wurden, denn falls nicht
+                                -> andernfalls früfen ob funktionsaufruf existiert für den parameter gebraucht wird
+                                    -> Default Antwort setzen
+                '''
+                if tag_of_highest_probability_from_predicted_classes in get_information_dict.keys():
+                    to_change = get_information(tag_of_highest_probability_from_predicted_classes, message)
+                    change_parameter = get_information_dict.get(tag_of_highest_probability_from_predicted_classes)[0]
+                    if to_change == "dontknow":
+                        result = "I don't understand."
+                    elif result in task_dict.keys():
+                        function_name = task_dict.get(result)
+                        function_call = eval("tasks."+function_name)
+                        result = function_call(to_change)
+                    else:
+                        result = result.replace(change_parameter,to_change)
+                        
+                '''
+                Prüfen ob !!!keine!!! Bedigung vorliegt das Informationen ausgelesen werden sollen
+                        -> um doppelt aufruf zu verhinden für den Fall:
+                            -> information auslese wird getriggert und zusätzlich methoden aufruf mit parameter
+                Prüfen ob die Reponse ein Trigger im task_dict ist 
+                falls ja -> aufrufen der entsprechenden Methode die den Task bearbeitetet 
+                '''
+                if tag_of_highest_probability_from_predicted_classes not in get_information_dict.keys():
+                    if result in task_dict.keys():
+                        function_name = task_dict.get(result)
+                        function_call = eval("tasks."+function_name)
+                        result = function_call()
+                        
+                        
+                '''
+                Checken ob es bestimmte ResponsePattern gibt auf Eingabe vom User basierend auf vorherige Response des Bots
+                '''
+                if tag_of_highest_probability_from_predicted_classes in direct_response_dict.keys():
+                    possible_trigger_latest_response_tags = direct_response_dict.get(tag_of_highest_probability_from_predicted_classes)[1]
+                    if get_last_memory_tag() in possible_trigger_latest_response_tags:
+                        response_tag = direct_response_dict.get(tag_of_highest_probability_from_predicted_classes)[0]
+                        for entry in list_of_intents:
+                            if entry['tag'] == response_tag:
+                                result = random.choice(entry['responses'])
+                                tag_of_highest_probability_from_predicted_classes = response_tag
+                                break
+                
+                '''
+                Speichern der bestimmmten, gesendeten Response des Bots in eine Liste. Diese enthällt immer die letzten 3 Responses.
+                '''
+                safe_in_memory(tag_of_highest_probability_from_predicted_classes,result)
+                break
     return result
 
 
