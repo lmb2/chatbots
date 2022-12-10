@@ -109,13 +109,17 @@ def get_information(tag, message):
         entity_names_to_check_for = get_information_dict.get(tag)[1]
         doc = nlp(message)
         entities=[(i, i.label_) for i in doc.ents if i.label_ in entity_names_to_check_for]
-        #print(entities)
-        
-        if len(entities) == 0:
-            return_value = "dontknow"
-        else:
+        if len(entities) != 0:
             return_value = str(entities[0][0])
-
+    '''
+    Wenn return_value Variable nicht gefüllt werden konnte existiert sie nicht!
+    Wir dann im except abgefangen und ein default-Rückgabewert gesetzt
+    '''
+    try:
+        return_value
+    except NameError:
+        return_value = "dontknow"
+            
     return return_value
 
 '''
@@ -160,10 +164,12 @@ def get_response(message):
                     function_name = task_dict.get(entry)
                     function_call = eval("tasks."+function_name)
                     result = function_call(message,False)
+                    tag = list(possible_actions.keys())[list(possible_actions.values()).index(entry)]
+                    safe_in_memory(tag,result)
                     break
         else:
             result = "I think I misunderstood something."
-        safe_in_memory("TEST",result)#TO_FIX -> tag muss aus schleife übernommen werden zum speichern
+            safe_in_memory("ERROR",result)
     else:
         predicted_class = predict_class(message)
         tag_of_highest_probability_from_predicted_classes = predicted_class[0]['intent']
