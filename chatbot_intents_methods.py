@@ -21,12 +21,12 @@ words = pickle.load(open('data/words_intents.pkl', 'rb'))
 classes = pickle.load(open('data/classes_intents.pkl', 'rb'))
 model = load_model('data/chatbotmodelintents.h5')
 
-#Tag: (<parameter_name_to_change>,[entity_names_to_check_for])
-#OR Tag:(trigger_word,[trigger_words_needed])
+#Tag: ([<parameter_name_to_change>,splitTrigger],[entity_names_to_check_for])
 get_information_dict = {
-    "courtesyGreetingResponse": ("<HUMAN>",["PERSON","ORG","NORP"]),
-    "weather": ("<>",["PERSON","ORG","GPE","EVENT"]),
-    "wikipediaSearch": ("split",["about","for"])
+    "courtesyGreetingResponse": (["<HUMAN>",""],["PERSON","ORG","NORP"]),
+    "weather": (["<>",""],["PERSON","ORG","GPE","EVENT"]),
+    "wikipediaSearch": (["<>","split"],["about","for"]),
+    "like": (["<SOMETHING>","split"],["like"])
     }
 #Response: function_name
 task_dict = {
@@ -96,7 +96,7 @@ Entweder ein Triggerword ist angegeben z.B. split -> mit zugehörigen Werten
 Oder es findet regulärer Aufruf statt, mit angabe der Entitys nach den Spacys suchen/filtern soll
 '''
 def get_information(tag, message):
-    if get_information_dict.get(tag)[0] == "split":
+    if get_information_dict.get(tag)[0][1] == "split":
         split_words_to_check_for = get_information_dict.get(tag)[1]
         message_words = clean_up_sentence(message)
         for splitter in split_words_to_check_for:
@@ -159,14 +159,21 @@ def get_response(message):
     if get_last_memory_tag() != 0 and get_last_memory_tag() in direct_task_with_input.keys():
         possible_actions = direct_task_with_input.get(get_last_memory_tag())
         if get_last_but_one_memory_tag() in possible_actions.keys():
-            for entry in possible_actions.values():
-                if entry in task_dict.keys():
-                    function_name = task_dict.get(entry)
-                    function_call = eval("tasks."+function_name)
-                    result = function_call(message,False)
-                    tag = list(possible_actions.keys())[list(possible_actions.values()).index(entry)]
-                    safe_in_memory(tag,result)
-                    break
+            key_of_possible_action = get_last_but_one_memory_tag()
+            value_of_possible_action = possible_actions.get(get_last_but_one_memory_tag())
+            if key_of_possible_action in get_information_dict.keys() and value_of_possible_action in task_dict.keys():
+                #Funktionaufruf mit Übergabeparameter !!!Aktuell hardcoded mit 2 Parametern weil nur Einsatz bei wikipedia!!!
+                function_name = task_dict.get(value_of_possible_action)
+                function_call = eval("tasks."+function_name)
+                result = function_call(message,False)
+            elif key_of_possible_action not in get_information_dict.keys() and value_of_possible_action in task_dict.keys():
+                #Funktionaufruf ohne Übergabeparameter
+                None #Aktuell noch nicht benötigt
+                # function_name = task_dict.get(value_of_possible_action())
+                # function_call = eval("tasks."+function_name)
+                # result = function_call()
+            
+            safe_in_memory(key_of_possible_action,result)
         else:
             result = "I think I misunderstood something."
             safe_in_memory("ERROR",result)
@@ -187,7 +194,7 @@ def get_response(message):
                 '''
                 if tag_of_highest_probability_from_predicted_classes in get_information_dict.keys():
                     to_change = get_information(tag_of_highest_probability_from_predicted_classes, message)
-                    change_parameter = get_information_dict.get(tag_of_highest_probability_from_predicted_classes)[0]
+                    change_parameter = get_information_dict.get(tag_of_highest_probability_from_predicted_classes)[0][0]
                     if to_change == "dontknow":
                         result = "I don't understand."
                     elif result in task_dict.keys():

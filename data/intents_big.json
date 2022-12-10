@@ -86,7 +86,10 @@
               "Im fine, thanks. My name is Adam",
               "Great thanks! My name is Bella",
               "Great thanks. I am Bella",
-              "My name is Adam"
+              "My name is Adam",
+              "My name is Bella",
+              "I am Bella",
+              "I am Adam. Nice to meet you."
         ],
         "responses": [
             "Great! Hi <HUMAN>! How can I help?",
@@ -244,6 +247,16 @@
         ],
         "responses": [
             "You can do whatever you want."
+        ]
+    },
+    {
+        "tag": "like",
+        "patterns": [
+            "do you like apples"
+        ],
+        "responses": [
+            "I don't know, why do you like <SOMETHING>?",
+            "Not sure. Why should i like <SOMETHING>?"
         ]
     }, 
     {
