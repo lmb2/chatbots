@@ -11,6 +11,18 @@
         ]
     },
     {
+        "tag": "wikipediaSearch",
+        "patterns": [
+            "can you tell me something about apples",
+            "do you know something about cars",
+            "get me some information for",
+            "get me some informaton about"
+        ],
+        "responses": [
+            "WikiSearch"
+        ]
+    },
+    {
         "tag": "greeting",
         "patterns": [
             "Hi",
@@ -73,7 +85,11 @@
               "Good thanks. I am Adam",
               "Im fine, thanks. My name is Adam",
               "Great thanks! My name is Bella",
-              "Great thanks. I am Bella"
+              "Great thanks. I am Bella",
+              "My name is Adam",
+              "My name is Bella",
+              "I am Bella",
+              "I am Adam. Nice to meet you."
         ],
         "responses": [
             "Great! Hi <HUMAN>! How can I help?",
@@ -152,7 +168,6 @@
             "Any time!",
             "My pleasure!",
             "No problem!",
-            "Thans does not ",
             "Glad to help!",
             "No worries!",
             "It was the least I could do!",
@@ -232,6 +247,16 @@
         ],
         "responses": [
             "You can do whatever you want."
+        ]
+    },
+    {
+        "tag": "like",
+        "patterns": [
+            "do you like apples"
+        ],
+        "responses": [
+            "I don't know, why do you like <SOMETHING>?",
+            "Not sure. Why should i like <SOMETHING>?"
         ]
     }, 
     {
@@ -739,10 +764,18 @@
     {
         "tag": "wrongAnswer",
         "patterns": [
-            "That was not the answer i was looking for."
+            "That was not the answer i was looking for.",
+            "Thats not the topic i wanted."
         ],
         "responses": [
             "I am sorry. Is there anything else i can help you with?"
+        ]
+    },
+    {
+        "tag": "wrongAnswerResponse",
+        "patterns": [],
+        "responses": [
+            "I am sorry. What topic are you looking for?"
         ]
     },
     {

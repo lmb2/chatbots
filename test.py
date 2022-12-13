@@ -86,22 +86,22 @@ CARDINAL:    Numerals that do not fall under another type.
 # Humidity is: {humidity}%
 #       ''')
 
-'''
-Gedächtnis speichern erste Tests (letzte x Responses speichern)
-'''
-latest_response_memory = []
-latest_response_memory.append("First")
-latest_response_memory.append("Second")
-latest_response_memory.append("Third")
-print(latest_response_memory)
-latest_response_memory.append("Fourth")
-if len(latest_response_memory) > 3:
-    latest_response_memory = list([entry for entry in latest_response_memory if latest_response_memory.index(entry) > 0])
-print(latest_response_memory)
-latest_response_memory.append("Fifth")
-if len(latest_response_memory) > 3:
-    latest_response_memory = list([entry for entry in latest_response_memory if latest_response_memory.index(entry) > 0])
-print(latest_response_memory)
+# '''
+# Gedächtnis speichern erste Tests (letzte x Responses speichern)
+# '''
+# latest_response_memory = []
+# latest_response_memory.append("First")
+# latest_response_memory.append("Second")
+# latest_response_memory.append("Third")
+# print(latest_response_memory)
+# latest_response_memory.append("Fourth")
+# if len(latest_response_memory) > 3:
+#     latest_response_memory = list([entry for entry in latest_response_memory if latest_response_memory.index(entry) > 0])
+# print(latest_response_memory)
+# latest_response_memory.append("Fifth")
+# if len(latest_response_memory) > 3:
+#     latest_response_memory = list([entry for entry in latest_response_memory if latest_response_memory.index(entry) > 0])
+# print(latest_response_memory)
 
 # '''
 # do you like/hate xxx
@@ -112,3 +112,24 @@ print(latest_response_memory)
 # print(response)
 # response = response.translate(str.maketrans('', '', string.punctuation))
 # print(response)
+
+
+import spacy
+
+nlp = spacy.load("en_core_web_lg")
+
+#text = 'Can you get me some information for tigers in india?'
+text = 'Tell me some information for informatik in java'
+doc = nlp(text)
+
+sentence_words = []
+for token in doc:
+    sentence_words.append(token.lemma_)
+    
+for elem in sentence_words:
+    if "for" == elem:
+        index_of_elem = sentence_words.index(elem)
+        print(elem)
+        print(index_of_elem)
+        splitted_message_topic = list(sentence_words)[index_of_elem+1:]
+        print(splitted_message_topic)

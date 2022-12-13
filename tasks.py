@@ -6,6 +6,7 @@ Created on Sat Nov 26 13:11:25 2022
 """
 from datetime import datetime
 import requests
+import wikipediaapi
 
 def do_google_search():
     return "Doing search..."
@@ -41,3 +42,19 @@ def do_weather_in(location):
     else:
         answer = "Sorry, can't find location."
     return answer
+    
+def do_wikipedia_search(possibleTopics,splitted=True):
+    wiki_wiki = wikipediaapi.Wikipedia('en')
+    if splitted:
+        for topic in possibleTopics:
+            wiki_page = wiki_wiki.page(topic)
+            if(wiki_page.exists()):
+                return wiki_page.summary[0:500]
+            else:
+                return "Sorry, i didn't find anything to your question"
+    else:
+        wiki_page = wiki_wiki.page(possibleTopics)
+        if(wiki_page.exists()):
+            return wiki_page.summary[0:500]
+        else:
+            return "Sorry, i didn't find anything to your question"
