@@ -76,7 +76,6 @@ def predict_class(sentence):
     res = model.predict(np.array([bow]))[0]
     ERROR_THRESHOLD = 0.25 #Welche Überstimmung mindestens vorhaden sein muss
     results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
-    
     results.sort(key=lambda x: x[1], reverse=True) #Sortierung das höchste Wahrscheinlichkeit an erster Stelle steht
     return_list = []
     for r in results:
