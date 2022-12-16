@@ -25,8 +25,7 @@ model = load_model('data/chatbotmodelintents.h5')
 get_information_dict = {
     "courtesyGreetingResponse": (["<HUMAN>",""],["PERSON","ORG","NORP"]),
     "weather": (["<>",""],["PERSON","ORG","GPE","EVENT"]),
-    "wikipediaSearch": (["<>","split"],["about","for"]),
-    "like": (["<SOMETHING>","split"],["like"])
+    "wikipediaSearch": (["<>","split"],["about","for"])
     }
 #Response: function_name
 task_dict = {
@@ -236,12 +235,26 @@ def get_response(message):
                 safe_in_memory(tag_of_highest_probability_from_predicted_classes,result)
                 break
     return result
+    
+def run_bot():
+    print("Bot is running!")
+    user_input = ""
+    while user_input.lower().strip() not in ["exit", "quit", "q"]:
+        user_input = input(">> ")
+        if user_input == "":
+            print("You entered nothing!")
+        else:
+            answer = get_response(user_input)
+            print(answer)
 
+    print("Thanks for talking to me. Bye!")
 
-
-print("Bot is running!")
-
-while True:
-    message = input("")
-    res = get_response(message)
-    print(res)
+def get_bot_response(user_input):
+    if user_input == "":
+        return "You entered nothing!"
+    else:
+        answer = get_response(user_input)
+        return answer
+    
+if __name__ == '__main__':
+    run_bot()
