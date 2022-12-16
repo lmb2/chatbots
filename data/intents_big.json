@@ -345,7 +345,20 @@
             "I don't know, why do you like <SOMETHING>?",
             "Not sure. Why should i like <SOMETHING>?"
         ]
-    }, 
+    },
+    {
+        "tag": "like_simple",
+        "patterns": [
+            "i like school",
+            "i like football",
+            "i like"
+        ],
+        "responses": [
+            "That is very nice, tell me more.",
+            "I like it too"
+        ]
+    },
+
     {
         "tag": "alive",
         "patterns": [
@@ -390,6 +403,21 @@
         ],
         "responses": [
             "Doesn't matter, i'll pay for you"
+        ]
+    },
+    {
+        "tag": "food",
+        "patterns": [
+            "I am hungry",
+            "Food",
+            "Do you have something to eat",
+            "I have nothing to eat",
+            "My fridge is empty"
+        ],
+        "responses": [
+            "I am also hungry",
+            "I can give you some Food",
+            "I have an apple"
         ]
     },
     {
@@ -1254,7 +1282,10 @@
             "How do you treat a Broken Toe?", 
             "what to do if i get a Broken Toe?", 
             "Which medicine to take if I get a Broken Toe?", 
-            "How to cure Broken Toe?"],
+            "How to cure Broken Toe?",
+            "My Toe hurts.",
+            "Toe"
+        ],
         "responses": ["1)To help decrease pain and swelling in a broken toe, elevate the foot, ice the injury, and stay off the foot. 2)Depending on the severity of the fracture, the toe may need to be put back into place (reduced), and some compound toe fractures may require surgery.3) Most broken toes heal without complications in six weeks."]
     },
 
