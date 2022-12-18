@@ -358,7 +358,20 @@
             "I like it too"
         ]
     },
-
+{
+        "tag": "dontLike",
+        "patterns": [
+            "I don't like football",
+            "I do not like school",
+            "I don't like",
+            "I do not like"
+        ],
+        "responses":[
+            "I agree with you",
+            "I can understand you",
+            "Sad to hear but i like it"
+        ]
+    },
     {
         "tag": "alive",
         "patterns": [
