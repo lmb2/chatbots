@@ -49,12 +49,12 @@ def do_wikipedia_search(possibleTopics,splitted=True):
         for topic in possibleTopics:
             wiki_page = wiki_wiki.page(topic)
             if(wiki_page.exists()):
-                return wiki_page.summary[0:500]
+                return wiki_wiki.extracts(wiki_page, exsentences=3)
             else:
                 return "Sorry, i didn't find anything to your question"
     else:
         wiki_page = wiki_wiki.page(possibleTopics)
         if(wiki_page.exists()):
-            return wiki_page.summary[0:500]
+            return wiki_wiki.extracts(wiki_page, exsentences=3)
         else:
             return "Sorry, i didn't find anything to your question"
