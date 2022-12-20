@@ -243,6 +243,8 @@ def run_bot():
         user_input = input(">> ")
         if user_input == "":
             print("You entered nothing!")
+        elif user_input in ["exit", "quit", "q"]:
+            break
         else:
             answer = get_response(user_input)
             print(answer)
