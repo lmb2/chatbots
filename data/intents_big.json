@@ -912,6 +912,17 @@
         ]
     },
     {
+        "tag": "anotherJoke",
+        "patterns": [
+            "get me more",
+            "tell me another one",
+            "more jokes"
+        ],
+        "responses": [
+            "That was no Joke!"
+        ]
+    },
+    {
         "tag": "news",
         "patterns": [
             "news",
