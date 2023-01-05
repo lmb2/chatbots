@@ -38,7 +38,8 @@ task_dict = {
               }
 #Tag: (newResponseTag,[latestMemoryTagsTrigger])
 direct_response_dict = {
-    "wrongAnswer": ("wrongAnswerResponse",["wikipediaSearch"])
+    "wrongAnswer": ("wrongAnswerResponse",["wikipediaSearch"]),
+    "anotherJoke": ("jokes",["jokes"])
     }
 #Tag: {Tag: response}
 direct_task_with_input = {
