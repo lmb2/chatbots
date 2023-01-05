@@ -221,11 +221,9 @@ def get_response(message):
                 Checken ob es bestimmte ResponsePattern gibt auf Eingabe vom User basierend auf vorherige Response des Bots
                 '''
                 if tag_of_highest_probability_from_predicted_classes in direct_response_dict.keys():
-                    print("Bin drin")
                     possible_trigger_latest_response_tags = direct_response_dict.get(tag_of_highest_probability_from_predicted_classes)[1]
                     if get_last_memory_tag() in possible_trigger_latest_response_tags:
                         response_tag = direct_response_dict.get(tag_of_highest_probability_from_predicted_classes)[0]
-                        print(response_tag)
                         for entry in list_of_intents:
                             if entry['tag'] == response_tag:
                                 result = random.choice(entry['responses'])
