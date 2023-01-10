@@ -115,21 +115,25 @@ CARDINAL:    Numerals that do not fall under another type.
 
 
 import spacy
+from googlesearch import search
 
-nlp = spacy.load("en_core_web_lg")
+test = search("Google")
+print(test[0])
 
-#text = 'Can you get me some information for tigers in india?'
-text = 'Tell me some information for informatik in java'
-doc = nlp(text)
+# nlp = spacy.load("en_core_web_lg")
 
-sentence_words = []
-for token in doc:
-    sentence_words.append(token.lemma_)
+# #text = 'Can you get me some information for tigers in india?'
+# text = 'Tell me some information for informatik in java'
+# doc = nlp(text)
+
+# sentence_words = []
+# for token in doc:
+#     sentence_words.append(token.lemma_)
     
-for elem in sentence_words:
-    if "for" == elem:
-        index_of_elem = sentence_words.index(elem)
-        print(elem)
-        print(index_of_elem)
-        splitted_message_topic = list(sentence_words)[index_of_elem+1:]
-        print(splitted_message_topic)
+# for elem in sentence_words:
+#     if "for" == elem:
+#         index_of_elem = sentence_words.index(elem)
+#         print(elem)
+#         print(index_of_elem)
+#         splitted_message_topic = list(sentence_words)[index_of_elem+1:]
+#         print(splitted_message_topic)
