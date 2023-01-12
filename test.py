@@ -114,11 +114,27 @@ CARDINAL:    Numerals that do not fall under another type.
 # print(response)
 
 
-import spacy
-from googlesearch import search
+#import spacy
 
-test = search("Google")
-print(test[0])
+
+#test Google Suche
+from googleapiclient.discovery import build
+
+my_api_key = "AIzaSyAxbO-5Ly0BokLfRJGgAPoLhdG5SM-F_dk" #The API_KEY you acquired
+my_cse_id = "f0add6a68738b4d9e" #The search-engine-ID you created
+
+
+def google_search(search_term, api_key, cse_id, **kwargs):
+    service = build("customsearch", "v1", developerKey=api_key)
+    res = service.cse().list(q=search_term, cx=cse_id, **kwargs).execute()
+    return res['items']
+
+
+results = google_search('red panda', my_api_key, my_cse_id, num=1)
+for result in results:
+    print(result["snippet"])
+
+
 
 # nlp = spacy.load("en_core_web_lg")
 
