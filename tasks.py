@@ -7,6 +7,7 @@ Created on Sat Nov 26 13:11:25 2022
 from datetime import datetime
 import requests
 import wikipediaapi
+from googleapiclient.discovery import build
 
 def do_google_search():
     return "Doing search..."
@@ -57,3 +58,21 @@ def do_wikipedia_search(possibleTopics,splitted=True):
             return wiki_wiki.extracts(wiki_page, exsentences=3)
         else:
             return "Sorry, i didn't find anything to your question"
+        
+def do_google_search(search_term):
+    api_key = open('data/google_api_key.txt','r').read() #The API_KEY you acquired
+    cse_id = open('data/google_cse_id.txt','r').read() #The search-engine-ID you created
+    service = build("customsearch", "v1", developerKey=api_key)
+    res = service.cse().list(q=search_term, cx=cse_id, num=1).execute()
+    output = ""
+    for result in res['items']:
+        output += result['snippet']
+    return output
+
+def run_test():
+    print(do_google_search("What is the largest fish?"))
+    print(do_weather_in("Düsseldorf"))
+    #print(do_wikipedia_search(["Berlin","Cologne"]))
+
+if __name__ == '__main__':
+    run_test()

@@ -120,19 +120,18 @@ CARDINAL:    Numerals that do not fall under another type.
 #test Google Suche
 from googleapiclient.discovery import build
 
-my_api_key = "AIzaSyAxbO-5Ly0BokLfRJGgAPoLhdG5SM-F_dk" #The API_KEY you acquired
-my_cse_id = "f0add6a68738b4d9e" #The search-engine-ID you created
-
-
-def google_search(search_term, api_key, cse_id, **kwargs):
+def google_search(search_term):
+    api_key = "AIzaSyAxbO-5Ly0BokLfRJGgAPoLhdG5SM-F_dk" #The API_KEY you acquired
+    cse_id = "f0add6a68738b4d9e" #The search-engine-ID you created
     service = build("customsearch", "v1", developerKey=api_key)
-    res = service.cse().list(q=search_term, cx=cse_id, **kwargs).execute()
-    return res['items']
+    res = service.cse().list(q=search_term, cx=cse_id, num=1).execute()
+    output = ""
+    for result in res['items']:
+        output += result['snippet']+"\n"
+    return output
 
 
-results = google_search('red panda', my_api_key, my_cse_id, num=1)
-for result in results:
-    print(result["snippet"])
+print(google_search('Tell me something about Germany'))
 
 
 
