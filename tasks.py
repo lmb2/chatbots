@@ -8,9 +8,6 @@ from datetime import datetime
 import requests
 import wikipediaapi
 from googleapiclient.discovery import build
-
-def do_google_search():
-    return "Doing search..."
     
 def do_current_date_and_time():
    return datetime.today().strftime('%d-%m-%Y %H:%M:%S')
@@ -64,6 +61,7 @@ def do_google_search(search_term):
     cse_id = open('data/google_cse_id.txt','r').read() #The search-engine-ID you created
     service = build("customsearch", "v1", developerKey=api_key)
     res = service.cse().list(q=search_term, cx=cse_id, num=1).execute()
+    service.close()
     output = ""
     for result in res['items']:
         output += result['snippet']

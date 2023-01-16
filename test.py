@@ -127,11 +127,14 @@ def google_search(search_term):
     res = service.cse().list(q=search_term, cx=cse_id, num=1).execute()
     output = ""
     for result in res['items']:
-        output += result['snippet']+"\n"
+        output += result['snippet']
+    if output.split()[3] == '...':
+        output = output.lstrip(output.split('...')[0])
+        output = output.strip('...')
     return output
 
 
-print(google_search('Tell me something about Germany'))
+print(google_search('Red panda'))
 
 
 
