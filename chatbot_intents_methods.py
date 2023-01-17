@@ -47,6 +47,10 @@ direct_task_with_input = {
     "wrongAnswerResponse": {"wikipediaSearch": "WikiSearch"}
     }
 
+spacy_content_check = [
+    "location"
+    ]
+
 latest_response_memory = []
 
 def clean_up_sentence(sentence):
@@ -69,6 +73,14 @@ def bag_of_words(sentence):
                 bag[i] = 1
     return np.array(bag)
 
+def content_pattern_check(predicted_class,sentence):
+        tag_to_check_pattern = predicted_class[0]['intent']
+        list_of_intents = intents['intents']            
+        for i in list_of_intents:
+            if i['tag'] == tag_to_check_pattern:
+                result = i['patterns']
+                print(result)
+
 '''
 Prüfen/Herausfinden für welche Klasse(Tag) die Eingabe zutrifft/passend ist
 '''
@@ -81,6 +93,9 @@ def predict_class(sentence):
     return_list = []
     for r in results:
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
+        
+    if return_list[0]['intent'] in spacy_content_check:
+         content_pattern_check(return_list, sentence)
         
     if len(return_list) == 0:
         return_list.append({'intent': "google", 'probability': str(1.0)})
