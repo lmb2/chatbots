@@ -128,13 +128,14 @@ def google_search(search_term):
     output = ""
     for result in res['items']:
         output += result['snippet']
+    print(output+"\n")
     if output.split()[3] == '...':
         output = output.lstrip(output.split('...')[0])
-        output = output.strip('...')
+        output = output.lstrip('...')
     return output
 
 
-print(google_search('Red panda'))
+print(google_search('Facts about France'))
 
 
 

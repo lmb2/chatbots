@@ -65,6 +65,9 @@ def do_google_search(search_term):
     output = ""
     for result in res['items']:
         output += result['snippet']
+    if output.split()[3] == '...':
+        output = output.lstrip(output.split('...')[0])
+        output = output.lstrip('...')
     return output
 
 def run_test():
