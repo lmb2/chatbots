@@ -25,7 +25,8 @@ model = load_model('data/chatbotmodelintents.h5')
 get_information_dict = {
     "courtesyGreetingResponse": (["<HUMAN>",""],["PERSON","ORG","NORP"]),
     "weather": (["<>",""],["PERSON","ORG","GPE","EVENT"]),
-    "wikipediaSearch": (["<>","split"],["about","for"])
+    "wikipediaSearch": (["<>","split"],["about","for"]),
+    "google": (["<>","pure"],[""])
     }
 #Response: function_name
 task_dict = {
@@ -82,7 +83,7 @@ def predict_class(sentence):
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
         
     if len(return_list) == 0:
-        return_list.append({'intent': "noanswer", 'probability': str(1.0)})
+        return_list.append({'intent': "google", 'probability': str(1.0)})
         
     print(return_list)
     return return_list
@@ -104,6 +105,8 @@ def get_information(tag, message):
                     index_of_elem = message_words.index(elem)
                     return_value = list(message_words)[index_of_elem+1:]
                     break
+    elif get_information_dict.get(tag)[0][1] == "pure":
+        return message
     else:
         entity_names_to_check_for = get_information_dict.get(tag)[1]
         doc = nlp(message)
