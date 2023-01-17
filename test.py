@@ -114,22 +114,45 @@ CARDINAL:    Numerals that do not fall under another type.
 # print(response)
 
 
-import spacy
+#import spacy
 
-nlp = spacy.load("en_core_web_lg")
 
-#text = 'Can you get me some information for tigers in india?'
-text = 'Tell me some information for informatik in java'
-doc = nlp(text)
+#test Google Suche
+from googleapiclient.discovery import build
 
-sentence_words = []
-for token in doc:
-    sentence_words.append(token.lemma_)
+def google_search(search_term):
+    api_key = "AIzaSyAxbO-5Ly0BokLfRJGgAPoLhdG5SM-F_dk" #The API_KEY you acquired
+    cse_id = "f0add6a68738b4d9e" #The search-engine-ID you created
+    service = build("customsearch", "v1", developerKey=api_key)
+    res = service.cse().list(q=search_term, cx=cse_id, num=1).execute()
+    output = ""
+    for result in res['items']:
+        output += result['snippet']
+    print(output+"\n")
+    if output.split()[3] == '...':
+        output = output.lstrip(output.split('...')[0])
+        output = output.lstrip('...')
+    return output
+
+
+print(google_search('Facts about France'))
+
+
+
+# nlp = spacy.load("en_core_web_lg")
+
+# #text = 'Can you get me some information for tigers in india?'
+# text = 'Tell me some information for informatik in java'
+# doc = nlp(text)
+
+# sentence_words = []
+# for token in doc:
+#     sentence_words.append(token.lemma_)
     
-for elem in sentence_words:
-    if "for" == elem:
-        index_of_elem = sentence_words.index(elem)
-        print(elem)
-        print(index_of_elem)
-        splitted_message_topic = list(sentence_words)[index_of_elem+1:]
-        print(splitted_message_topic)
+# for elem in sentence_words:
+#     if "for" == elem:
+#         index_of_elem = sentence_words.index(elem)
+#         print(elem)
+#         print(index_of_elem)
+#         splitted_message_topic = list(sentence_words)[index_of_elem+1:]
+#         print(splitted_message_topic)
