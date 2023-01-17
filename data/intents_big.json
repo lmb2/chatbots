@@ -21,9 +21,7 @@
             "dja933an"
         ],
         "responses": [
-            "Sorry, can't understand you",
-            "Please give me more info",
-            "Not sure I understand"
+            "Sorry, can't understand you."
         ]
     },
     {
@@ -71,7 +69,7 @@
         ],
         "responses": [
             "Hello",
-            "Good to see you again",
+            "Good to see you again.",
             "Hey",
             "Hello, thanks for visiting.",
             "Hi there, what can I do for you?",
@@ -152,7 +150,7 @@
                 "How are you feelings?"
         ],
         "responses": [
-                "I'm fine",
+                "I'm fine.",
                 "I am fine. And you?",
                 "Everything is Ok.",
                 "All fine.",
@@ -200,7 +198,6 @@
             "See next time.",
             "See you later.",
             "Was my pleassuare to meet you.",
-            "Hope will cath up sortly.",
             "Have a nice day.",
             "Bye! Come back again soon.",
             "So, till next time.",
@@ -337,25 +334,17 @@
         ]
     },
     {
-        "tag": "like",
-        "patterns": [
-            "do you like apples"
-        ],
-        "responses": [
-            "I don't know, why do you like <SOMETHING>?",
-            "Not sure. Why should i like <SOMETHING>?"
-        ]
-    },
-    {
         "tag": "like_simple",
         "patterns": [
             "i like school",
             "i like football",
-            "i like"
+            "i like",
+            "i love apples"
         ],
         "responses": [
             "That is very nice, tell me more.",
-            "I like it too"
+            "I like it too.",
+            "I love it too."
         ]
     },
 {
@@ -367,9 +356,9 @@
             "I do not like"
         ],
         "responses":[
-            "I agree with you",
-            "I can understand you",
-            "Sad to hear but i like it"
+            "I agree with you.",
+            "I can understand you.",
+            "Sad to hear but i like it."
         ]
     },
     {
