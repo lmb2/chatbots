@@ -28,6 +28,7 @@ get_information_dict = {
     "wikipediaSearch": (["<>","split"],["about","for"]),
     "google": (["<>","pure"],[""])
     }
+
 #Response: function_name
 task_dict = {
     "Redirecting to Google...": "do_google_search",
@@ -47,15 +48,20 @@ direct_task_with_input = {
     "wrongAnswerResponse": {"wikipediaSearch": "WikiSearch"}
     }
 
+spacy_content_check = [
+    "location"
+    ]
+
+ignore_letters = ['?', '!', '.', ',']
 latest_response_memory = []
 
 def clean_up_sentence(sentence):
     doc = nlp(sentence)
     sentence_words = []
     for token in doc:
-        sentence_words.append(token.lemma_)
+        if token.lemma_ not in ignore_letters:
+            sentence_words.append(token.lemma_)
     return sentence_words
-
 '''
 Bag of Words für die Eigabe erstellen ->
 prüfen für jedes Wort der Eingabe ob es in den Wörtern(words) aus den pattern vorkommt
@@ -70,20 +76,58 @@ def bag_of_words(sentence):
     return np.array(bag)
 
 '''
+Vergleicht inhaltlich alle vorhandenen Pattern in der übermittelten Klasse/Tag mit dem übermittelten Satz/Eingabe
+return True => geringe inhaltliche Übereinstimmung der Pattern mit Eingabe
+return False => hohe inhaltliche Übereinstimmung der Pattern mit Eingabe
+'''
+def content_pattern_check(predicted_class,sentence):
+        tag_to_check_pattern = predicted_class[0]['intent']
+        list_of_intents = intents['intents']      
+        patterns_to_check = []
+        highest_similartiy = 0;
+        for i in list_of_intents:
+            if i['tag'] == tag_to_check_pattern:
+                patterns_to_check = i['patterns']
+                #print(patterns_to_check)
+        
+        for pattern in patterns_to_check:
+            simi = nlp(pattern).similarity(nlp(sentence))
+            if simi > highest_similartiy:
+                highest_similartiy = simi
+            #print(pattern,"<=>",sentence,"simi=",simi)
+        #print("highest simi=",highest_similartiy)
+        
+        if highest_similartiy < 0.7:
+            return True
+        else:
+            return False
+            
+
+'''
 Prüfen/Herausfinden für welche Klasse(Tag) die Eingabe zutrifft/passend ist
 '''
 def predict_class(sentence):
     bow = bag_of_words(sentence)
     res = model.predict(np.array([bow]))[0]
-    ERROR_THRESHOLD = 0.25 #Welche Überstimmung mindestens vorhaden sein muss
+    ERROR_THRESHOLD = 0.3 #Welche Überstimmung mindestens vorhaden sein muss
     results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True) #Sortierung das höchste Wahrscheinlichkeit an erster Stelle steht
     return_list = []
     for r in results:
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
-        
+    
+    '''
+    Falls keine Übereinstimmung gefunden wurde, wird als default "google" gesetzt => Usereingabe wird gegoogelt
+    Außerdem wird geprüft ob die aktuelle höchste übereinstimmende Klasse/Tag in der content_check Liste vorhanden ist
+    (Dient der Abgrenzung inhaltlicher Konflikte, z.B. Triggern fragen nach Orte häufig "locatin" des Bots, obwohl nach Orten gefragt wird)
+        -> Falls ja => Prüfen lassen der inhaltlichen Übereinstimmung der Eingabe zu den Pattern der Klasse/Tag
+            -> Stellt sich geringe inhaltliche Übereinstimmung heraus => setzten des "google"-Triggers um Usereingabe zu googeln
+    '''
     if len(return_list) == 0:
         return_list.append({'intent': "google", 'probability': str(1.0)})
+    elif return_list[0]['intent'] in spacy_content_check:
+        if (content_pattern_check(return_list, sentence)):
+            return_list.insert(0,{'intent': "google", 'probability': str(1.0)})
         
     print(return_list)
     return return_list
