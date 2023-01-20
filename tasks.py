@@ -18,7 +18,7 @@ def do_current_date():
 def do_current_time():
     return datetime.today().strftime('%H:%M:%S')
 
-def do_weather_in(location):
+def do_weather_in(location,splitted=True):
     BASE_URL = "https://api.openweathermap.org/data/2.5/weather?id=524901&appid="
     API_KEY = open('data/api_key.txt','r').read()
     CITY = str(location).title()
@@ -56,7 +56,7 @@ def do_wikipedia_search(possibleTopics,splitted=True):
         else:
             return "Sorry, i didn't find anything to your question"
         
-def do_google_search(search_term):
+def do_google_search(search_term,splitted=True):
     api_key = open('data/google_api_key.txt','r').read() #The API_KEY you acquired
     cse_id = open('data/google_cse_id.txt','r').read() #The search-engine-ID you created
     service = build("customsearch", "v1", developerKey=api_key)
