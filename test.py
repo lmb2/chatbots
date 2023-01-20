@@ -11,7 +11,7 @@ nlp = spacy.load("en_core_web_lg")
 pattern_sentence_1 = nlp("Where are you?")
 pattern_sentence_2 = nlp("Where do i find you?")
 
-check_sentence = nlp("where do you live?")
+check_sentence = nlp("Where can i find Eiffeltower?")
 
 print(pattern_sentence_1.similarity(check_sentence))
 print(check_sentence.similarity(pattern_sentence_1))

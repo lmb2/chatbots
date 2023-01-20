@@ -22,7 +22,7 @@ intents = json.loads(open('data/intents_big.json',encoding='utf8').read())
 words = []
 classes = []
 documents = []
-#ignore_letters = ['?', '!', '.', ',']
+ignore_letters = ['?', '!', '.', ',']
 
 
 '''
@@ -35,7 +35,8 @@ for intent in intents['intents']:
         word_list= []
         spacy_doc = nlp(pattern)
         for token in spacy_doc:
-            word_list.append(token.lemma_)
+            if token.lemma_ not in ignore_letters:
+                word_list.append(token.lemma_)
             
         words.extend(word_list)
         documents.append((word_list, intent['tag']))
