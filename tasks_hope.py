@@ -2,7 +2,7 @@
 """
 Created on Sat Nov 26 13:11:25 2022
 
-@author: Laura Behmenburg und Fabian van Treek
+@author: Laura-Marie Behmenburg und Fabian van Treek
 """
 from datetime import datetime
 import requests

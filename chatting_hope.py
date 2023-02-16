@@ -2,7 +2,7 @@
 """
 Created on Fri Nov 25 10:50:18 2022
 
-@author: Laura Behmenburg und Fabian van Treek
+@author: Laura-Marie Behmenburg und Fabian van Treek
 """
 import random
 import json
@@ -161,7 +161,7 @@ def predict_class(sentence):
     return return_list
 
 '''
-Methode zum herausfiltern von Konkreten informationen für die weiter Verwendung
+Methode zum Herausfiltern von konkreten Informationen für die weiter Verwendung
 Bestimmt durch Angabe bestimmter Parameter
 Entweder ein Triggerword ist angegeben z.B. split -> mit zugehörigen Werten
     -> dann wird der entsprechende Part in der Methode ausgeführt

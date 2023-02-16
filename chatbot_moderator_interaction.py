@@ -2,7 +2,7 @@
 """
 Created on Fri Dec 16 17:54:58 2022
 
-@author: Laura Behmenburg und Fabian van Treek
+@author: Laura-Marie Behmenburg und Fabian van Treek
 """
 
 from chatbot_intents_methods import get_bot_response

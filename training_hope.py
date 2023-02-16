@@ -2,7 +2,7 @@
 """
 Created on Fri Nov 25 10:49:47 2022
 
-@author: Laura Behmenburg und Fabian van Treek
+@author: Laura-Marie Behmenburg und Fabian van Treek
 """
 import random
 import json
