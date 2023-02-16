@@ -2,7 +2,7 @@
 """
 Created on Sat Nov 26 13:11:25 2022
 
-@author: Fabian
+@author: Laura-Marie Behmenburg und Fabian van Treek
 """
 from datetime import datetime
 import requests
@@ -18,6 +18,9 @@ def do_current_date():
 def do_current_time():
     return datetime.today().strftime('%H:%M:%S')
 
+'''
+Wetter mittels API für gewünschten Ort bestimmen und Antwort bauen
+'''
 def do_weather_in(location,splitted=True):
     BASE_URL = "https://api.openweathermap.org/data/2.5/weather?id=524901&appid="
     API_KEY = open('data/api_key.txt','r').read()
@@ -32,14 +35,15 @@ def do_weather_in(location,splitted=True):
         humidity = response['main']['humidity']
         description = response['weather'][0]['description']
 
-        answer = f'''General Weather in {CITY}: {description}
-        Temperature in {CITY}: {temp}°C
-        feels like: {temp_feels_like}°C
-        Humidity is: {humidity}% '''
+        answer = f'''General Weather in {CITY}: {description}. Temperature in {CITY}: {temp}°C, feels like: {temp_feels_like}°C. Humidity is: {humidity}% '''
     else:
         answer = "Sorry, can't find location."
     return answer
-    
+
+'''
+Wikipedia-Suche mittels Wikipedia-API
+Ausgabe der ersten 3 Sätze des gefundenen Wikipedia-Artikels
+'''
 def do_wikipedia_search(possibleTopics,splitted=True):
     wiki_wiki = wikipediaapi.Wikipedia('en')
     if splitted:
@@ -55,7 +59,11 @@ def do_wikipedia_search(possibleTopics,splitted=True):
             return wiki_wiki.extracts(wiki_page, exsentences=3)
         else:
             return "Sorry, i didn't find anything to your question"
-        
+
+'''
+Google-Suche mittels Google-API
+Ausgabe des ersten Eintrags den die erstelle Google-Suchmaschine findet
+'''        
 def do_google_search(search_term,splitted=True):
     api_key = open('data/google_api_key.txt','r').read() #The API_KEY you acquired
     cse_id = open('data/google_cse_id.txt','r').read() #The search-engine-ID you created
