@@ -11,14 +11,14 @@
 
 
 ## Usage
-# Train the Bot
+### Train the Bot
 Start the following file to start the training:
 
 ```
 training_hope.py
 ```
 Training must be done once, but if some changes happen to the intents_hope.json, by adding new Patterns or changing them. The Bot must be trained again, otherwise the bot does not take over the new changes.
-# Start the Bot
+### Start the Bot
 Start the following file to start the Bot:
 
 ```
