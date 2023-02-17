@@ -25,7 +25,7 @@
     - <b>get_last_but_one_memory_tag()</b>: get the last but one memory
     - <b>get_response(message)</b>: main-method for final response generation, task calling and other behavior.
     - <b>run_hope()</b>: method to run the bot 
-    - <b>get_bot_response(user_input)</b>: method for the interaction with other bots, used in the [chatbot_moderator_interaktion.py](#chatbot_moderator_interaktion.py)
+    - <b>get_bot_response(user_input)</b>: method for the interaction with other bots, used in the [chatbot_moderator_interaktion.py](#chatbot_moderator_interaktionpy)
     <p>
 
 
@@ -51,7 +51,7 @@
 
 ## Modify intents
 
-To add,change or delete parts of the intents you need to unterstand the structure. Each intent is seperated in a <ins>tag(class)</ins> that describes the content in a simple way, a <ins>list of patterns</ins> which are the trigger for the bot and a <ins>list of responses</ins> from which the bot will pick a response. <br>
+To add,change or delete parts of the intents you need to unterstand the structure. Each intent is seperated in a <b>tag(class)</b> that describes the content in a simple way, a <b>list of patterns</b> which are the trigger for the bot and a <b>list of responses</b> from which the bot will pick a response. <br>
 An example:
 ```
     {
@@ -79,16 +79,17 @@ An example:
 ## Modify other behaviors
 
 Other behaviors are defined by dictionaries or lists that determine when it triggers and what do do in the situation. These are:
-- [get_information_dict](#get_information_dict)
-- [task_dict](#task_dict)
+- [Get information from user-input](#get-information)
+- [Execute tasks due to user-input](#execute-tasks)
 - direct_response_dict
 - direct_task_with_input
 - spacy_content_check
 
-In the following all these parts are gonna be explained, that you know how to modify them or add your own entrys.
+In the following all these parts are gonna be explained, that you know how to modify them or add your own entries.
 
-- ### <b>get_information_dict</b>
-    That dict is looking like this:
+- ### <b>Get information</b>
+    This shows you multiple ways to get information out of the user-input. Using a dictionary filled with the parameters needed.
+    That dictionary is looking like this:
     ```
     get_information_dict = {
         "courtesyGreetingResponse": (["<HUMAN>",""],["PERSON","ORG","NORP"]),
@@ -182,4 +183,4 @@ In the following all these parts are gonna be explained, that you know how to mo
     }
     ```
 
-- ### <b>task_dict</b>
+- ### <b>Execute tasks</b>
