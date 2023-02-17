@@ -1,3 +1,6 @@
+# Tensorflow intent-based Chatbot - Hope
+
+Authors: Laura-Marie Behmenburg, Fabian van Treek
 ## Installation
 ### Requirements
 ## Data
