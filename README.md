@@ -35,7 +35,7 @@ After starting the Bot the Console should look like this:
 Bot is running!
 Me:
 ```
-Now the Bot is running, and a question or anything else can be written, and the Bot will answer.
+Now the bot is running and you can talk with him.
 
 
 
