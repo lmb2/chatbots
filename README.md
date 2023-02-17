@@ -11,10 +11,26 @@
 
 
 ## Usage
+# Train the Bot
+Start the following file to start the training:
 
-### Create chatbot-model
+```
+training_hope.py
+```
+Training must be done once, but if some changes happen to the intents_hope.json, by adding new Patterns or changing them. The Bot must be trained again, otherwise the bot does not take over the new changes.
+# Start the Bot
+Start the following file to start the Bot:
 
-### Start the Chatbot
+```
+chatting_hope.py
+```
+After starting the Bot the Console should look like this:
+```
+Bot is running!
+Me:
+```
+Now the Bot is running, and a question or anything else can be written, and the Bot will answer.
+
 
 
 
