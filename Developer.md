@@ -23,7 +23,7 @@
     - <b>safe_in_memory(tag, response)</b>: safes the tag and response of the latest bot-answer into the memory
     - <b>get_last_memory_tag()</b>: get the last memory 
     - <b>get_last_but_one_memory_tag()</b>: get the last but one memory
-    - <b>get_response(message)</b>: main-method for final response generation, task calling and other behavior.
+    - <b>get_response(message)</b>: main-method for final response generation, task calling and other behavior
     - <b>run_hope()</b>: method to run the bot 
     - <b>get_bot_response(user_input)</b>: method for the interaction with other bots, used in the [chatbot_moderator_interaktion.py](#chatbot_moderator_interaktionpy)
     <p>
@@ -106,7 +106,7 @@ In the following all these parts are gonna be explained, that you know how to mo
     Afterwards the bot replaces the obtained information with the given part that should be replaced: ``["<HUMAN>",""]``. <br>
     The intent part of this example looks like this:
     ```
-        {
+    {
         "tag": "courtesyGreetingResponse",
         "patterns": [
               "Good thanks! My name is Adam",
@@ -136,7 +136,7 @@ In the following all these parts are gonna be explained, that you know how to mo
     Afterwards the bot uses the obtained information for the next steps. <br>
     The intent part of this example looks like this:
     ```
-        {
+    {
         "tag": "weather",
         "patterns": [
             "how is the temperature in Düsseldorf",
@@ -155,7 +155,7 @@ In the following all these parts are gonna be explained, that you know how to mo
     Afterwards the bot uses the obtained information for the next steps. <br>
     The intent part of this example looks like this:
     ```
-        {
+    {
         "tag": "wikipediaSearch",
         "patterns": [
             "can you tell me something about apples",
@@ -174,7 +174,7 @@ In the following all these parts are gonna be explained, that you know how to mo
     Settled by the ``["<>","pure"]`` the bot knows that he has to use the complete user-input for the next step. <br>
     The intent part of this example looks like this:
     ```
-        {
+    {
         "tag": "google",
         "patterns": [],
         "responses": [
