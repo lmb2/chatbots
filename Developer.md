@@ -53,7 +53,7 @@
 
 To add,change or delete parts of the intents you need to unterstand the structure. Each intent is seperated in a <b>tag(class)</b> that describes the content in a simple way, a <b>list of patterns</b> which are the trigger for the bot and a <b>list of responses</b> from which the bot will pick a response. <br>
 An example:
-```
+```json
     {
         "tag": "courtesyGreeting",
         "patterns": [
@@ -81,16 +81,16 @@ An example:
 Other behaviors are defined by dictionaries or lists that determine when it triggers and what do do in the situation. These are:
 - [Get information from user-input](#get-information)
 - [Execute tasks due to user-input](#execute-tasks)
-- direct_response_dict
-- direct_task_with_input
+- [Direct responses based on prior response](#direct-responses)
+- [Direct task with user-input based on prior response](#direct-task-with-input)
 - spacy_content_check
 
 In the following all these parts are gonna be explained, that you know how to modify them or add your own entries.
 
 - ### <b>Get information</b>
-    This shows you multiple ways to get information out of the user-input. Using a dictionary filled with the parameters needed.
-    That dictionary is looking like this:
-    ```
+    This shows you multiple ways to get information out of the user-input. Using a dictionary filled with the parameters needed.<br>
+    The dictionary with the required information looks like this:
+    ```json
     get_information_dict = {
         "courtesyGreetingResponse": (["<HUMAN>",""],["PERSON","ORG","NORP"]),
         "weather": (["<>",""],["PERSON","ORG","GPE","EVENT"]),
@@ -99,13 +99,13 @@ In the following all these parts are gonna be explained, that you know how to mo
     }
     ```
     The basic pattern is: `` "Tag": ([parameter_name_to_change,splitTrigger],[entity_names_to_check_for]) `` <br>
-    <br/><br/>
+    <br/>
     <ins>Let's look at the first dictionary entry:</ins> <br>
     This is gonna get triggered when the bot determines ``"courtesyGreetingResponse"`` as tag(class) to chose a response from. <br>
     When it's triggered the bot knows that he has to check the user-input by using the spacy-entity-check with the given parameters ``["PERSON","ORG","NORP"]``, because there is no <b>splitTrigger</b> defined. <br>
     Afterwards the bot replaces the obtained information with the given part that should be replaced: ``["<HUMAN>",""]``. <br>
     The intent part of this example looks like this:
-    ```
+    ```json
     {
         "tag": "courtesyGreetingResponse",
         "patterns": [
@@ -135,7 +135,7 @@ In the following all these parts are gonna be explained, that you know how to mo
     When it's triggered the bot knows that he has to check the user-input by using the spacy-entity-check with the given parameters ``["PERSON","ORG","GPE","EVENT"]``, because there is no <b>splitTrigger</b> defined. <br>
     Afterwards the bot uses the obtained information for the next steps. <br>
     The intent part of this example looks like this:
-    ```
+    ```json
     {
         "tag": "weather",
         "patterns": [
@@ -154,7 +154,7 @@ In the following all these parts are gonna be explained, that you know how to mo
     When it's triggered the bot knows that he has to split the user-input appointed by ``["<>","split"]`` and to split at the given words ``["about","for"]``. <br>
     Afterwards the bot uses the obtained information for the next steps. <br>
     The intent part of this example looks like this:
-    ```
+    ```json
     {
         "tag": "wikipediaSearch",
         "patterns": [
@@ -173,7 +173,7 @@ In the following all these parts are gonna be explained, that you know how to mo
     This get's triggered when the bot determines ``"google"`` as tag(class) to chose a response from. <br>
     Settled by the ``["<>","pure"]`` the bot knows that he has to use the complete user-input for the next step. <br>
     The intent part of this example looks like this:
-    ```
+    ```json
     {
         "tag": "google",
         "patterns": [],
@@ -182,5 +182,142 @@ In the following all these parts are gonna be explained, that you know how to mo
         ]
     }
     ```
-
+    <br/><br/>
 - ### <b>Execute tasks</b>
+    The following shows how to add tasks and their triggers, so the bot can execute them in the way you want to.<br>
+    The dictionary with the required information looks like this:
+    ```json
+    task_dict = {
+        "Redirecting to Google...": "do_google_search",
+        "Date and Time": "do_current_date_and_time",
+        "Date": "do_current_date",
+        "Time": "do_current_time",
+        "Weather": "do_weather_in",
+        "WikiSearch": "do_wikipedia_search"
+    }
+    ```
+    The basic pattern is: `` "Response": "function_name" `` <br>
+    <br/>
+    <ins>Let's look at the first dictionary entry to giving you an example:</ins> <br>
+    The task gets triggered when the determined response the bot has chosen is equal to ``"Redirecting to Google..."``. <br>
+    Then the task named by their method-name in the [tasks_hope.py](#tasks_hopepy), in this case ``"do_google_search"`` is gonna be executed.<br>
+    <br/>
+    The other entries are working the same way. In case a function needs parameters to work, obtained from the user-input, that handling take place in the [get information](#get-information) part. <br>
+    Implemented and shown examples are <b>weather, wikipediaSearch and google</b>.
+    <br/><br/><br/>
+
+- ### <b>Direct responses</b>
+    This part is all about handling behavior in case a specific response has been send last and the user replied something that should be handled in a different way.<br>
+    The dictionary with the required information looks like this:
+    ```json
+    direct_response_dict = {
+        "wrongAnswer": ("wrongAnswerResponse",["wikipediaSearch"]),
+        "anotherJoke": ("jokes",["jokes"])
+    }
+    ```
+    The basic pattern is: ``"Tag": (newResponseTag,[latestMemoryTagsTriggers])`` <br>
+    <br/>
+    <ins>Let's look at the first dictionary entry:</ins> <br>
+    In case the determined tag(class) the bot has predicted is ``"wrongAnswer"``, the bot is gonna to check if the last entry in his memory is ``["wikipediaSearch"]``.<br>
+    If thats true, the bot sets ``"wrongAnswerResponse"`` as new tag(class) to chose a response from.<br>
+    If not, the previous determined tag(class) stays and the bot choses the response from there.<br>
+    The dictionaries with the required information looks like this:
+    <table>
+    <tr>
+    <th>predicted tag(class)</th>
+    <th>direct response tag(class)</th>
+    </tr>
+    <tr>
+    <td>
+
+    ```json
+    {
+        "tag": "wrongAnswer",
+        "patterns": [
+            "That was not the answer i was looking for.",
+            "Thats not the topic i wanted."
+        ],
+        "responses": [
+            "I am sorry. Is there anything else i can help you with?"
+        ]
+    }
+    ```
+    </td>
+    <td>
+
+    ```json
+    {
+        "tag": "wrongAnswerResponse",
+        "patterns": [],
+        "responses": [
+            "I am sorry. What topic are you looking for?"
+        ]
+    }
+    ```
+
+    </td>
+    </tr>
+
+    </table>
+
+    <br/>
+
+    <ins>Let's take a look at the second entry:</ins> <br>
+    In case the determined tag(class) the bot has predicted is ``"anotherJoke"``, the bot is gonna to check if the last entry in his memory is ``["jokes"]``.<br>
+    If thats true, the bot sets ``"jokes"`` as new tag(class) to chose a response from.<br>
+    If not, the previous determined tag(class) stays and the bot choses the response from there.<br>
+    The dictionaries with the required information looks like this:
+    <table>
+    <tr>
+    <th>predicted tag(class)</th>
+    <th>direct response tag(class)</th>
+    </tr>
+    <tr>
+    <td>
+
+    ```json
+    {
+        "tag": "anotherJoke",
+        "patterns": [
+            "get me more",
+            "tell me another one",
+            "more jokes"
+        ],
+        "responses": [
+            "That was no Joke!"
+        ]
+    }
+    ```
+    </td>
+    <td>
+
+    ```json
+    {
+        "tag": "jokes",
+        "patterns": [
+            "Tell me a joke",
+            "Joke",
+            "Make me laugh",
+            "Can you be a bit funny",
+            "Tell me something funny!",
+            "Do you know a joke?",
+            "How about a joke",
+            "Do you know any jokes?",
+            "Any joke for me?",
+            "Give me a joke"
+        ],
+        "responses": [
+            "A perfectionist walked into a bar...apparently, the bar wasn't set high enough",
+            "I ate a clock yesterday, it was very time-consuming"
+        ]
+    }
+    ```
+    <b>* the jokes-respones are way more extensive, shortened here</b>
+    </td>
+    </tr>
+
+    </table>
+
+    <br/>
+
+- ### <b>Direct task with input</b>
