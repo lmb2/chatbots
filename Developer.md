@@ -90,7 +90,7 @@ In the following all these parts are gonna be explained, that you know how to mo
 - ### <b>Get information</b>
     This shows you multiple ways to get information out of the user-input. Using a dictionary filled with the parameters needed.<br>
     The dictionary with the required information looks like this:
-    ```json
+    ```
     get_information_dict = {
         "courtesyGreetingResponse": (["<HUMAN>",""],["PERSON","ORG","NORP"]),
         "weather": (["<>",""],["PERSON","ORG","GPE","EVENT"]),
@@ -186,7 +186,7 @@ In the following all these parts are gonna be explained, that you know how to mo
 - ### <b>Execute tasks</b>
     The following shows how to add tasks and their triggers, so the bot can execute them in the way you want to.<br>
     The dictionary with the required information looks like this:
-    ```json
+    ```
     task_dict = {
         "Redirecting to Google...": "do_google_search",
         "Date and Time": "do_current_date_and_time",
@@ -209,7 +209,7 @@ In the following all these parts are gonna be explained, that you know how to mo
 - ### <b>Direct responses</b>
     This part is all about handling behavior in case a specific response has been send last and the user replied something that should be handled in a different way.<br>
     The dictionary with the required information looks like this:
-    ```json
+    ```
     direct_response_dict = {
         "wrongAnswer": ("wrongAnswerResponse",["wikipediaSearch"]),
         "anotherJoke": ("jokes",["jokes"])
