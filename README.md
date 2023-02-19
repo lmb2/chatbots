@@ -2,7 +2,7 @@
 
 **Authors: Laura-Marie Behmenburg, Fabian van Treek**
 
-The Inspration for the Cahtbot was tanken by this [Video](https://www.youtube.com/watch?v=1lwddP0KUEg) and Links zu Websiten einfügen.
+The Inspration for the Cahtbot was tanken by this [Video](https://www.youtube.com/watch?v=1lwddP0KUEg) and [The Basics of building an Artificial Intelligence Chatbot – 2023](https://www.mygreatlearning.com/blog/basics-of-building-an-artificial-intelligence-chatbot/).
 These ideas were used as a basic structure and expanded and adapted with our own features.
 
 ## Installation
