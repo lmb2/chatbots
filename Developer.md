@@ -1,8 +1,9 @@
 # Developer Information
 
 - [Modules & Functions](#modules--functions)
+- [Simple program structure about how the bot handle the user-input](#simple-programm-structure)
 - [How to modify intents](#modify-intents)
-- [How to modify other behavior](#modify-other-behaviors)
+- [How to modify behavior](#modify-behaviors)
 
 ## Modules & Functions
 
@@ -48,6 +49,39 @@
     ```
     python chatbot_moderator_interaction.py
     ```
+    <p>
+
+
+- ### <b>run_gui_hope.py</b>
+
+    This file will start the bot with a simple gui, where the user can enter his input within a textfield. <br>
+    The user-input and the bot-response will be printed on the screen. 
+    ```
+    python run_gui_hope.py
+    ```
+    <p>
+
+## Simple programm structure
+
+This shows in a simple way, how the bot come to an answer. Beginnig with den <b>User-Input(1.)</b> until the <b>Return for the output(8.)</b>. 
+
+    1. User-input
+    2. Check if the last response in memory triggers a direct_task
+        - If True: handle direct_task -> will be final bot response
+        - If False: go further
+    3. Predict the tag(class) from user-input by using the model, afterwards a reponse from the respones will be chosen randomly
+        - The prediction process includes setting the google-Tag if necessary
+    4. Check if the predicted tag(class) triggers the get_information
+        - If True: handle get_information -> evantually change a part in chosen response | execute a task -> will be final bot response
+        - If False: go further
+    5. Check if the predicted tag(class) triggers a task without needing any information from the user-input
+        - If True: handle task -> will be final bot response
+        - If False: go further
+    6. Check if the predicted tag(class) triggers a direct_response
+        If True: handle direct_response -> will be final bot response
+        If False: go further
+    7. Safe the predicted tag(classs) and the final response in the bot memory
+    8. Return the final response for the output
 
 ## Modify intents
 
@@ -76,21 +110,21 @@ An example:
     }
 ```
 
-## Modify other behaviors
+## Modify behaviors
 
 Other behaviors are defined by dictionaries or lists that determine when it triggers and what do do in the situation. These are:
 - [Get information from user-input](#get-information)
 - [Execute tasks due to user-input](#execute-tasks)
 - [Direct responses based on prior response](#direct-responses)
 - [Direct task with user-input based on prior response](#direct-task-with-input)
-- spacy_content_check
+- [Additional content check to avoid known mispredictions](#additional-content-check)
 
 In the following all these parts are gonna be explained, that you know how to modify them or add your own entries.
 
 - ### <b>Get information</b>
     This shows you multiple ways to get information out of the user-input. Using a dictionary filled with the parameters needed.<br>
     The dictionary with the required information looks like this:
-    ```
+    ```python
     get_information_dict = {
         "courtesyGreetingResponse": (["<HUMAN>",""],["PERSON","ORG","NORP"]),
         "weather": (["<>",""],["PERSON","ORG","GPE","EVENT"]),
@@ -182,11 +216,12 @@ In the following all these parts are gonna be explained, that you know how to mo
         ]
     }
     ```
-    <br/><br/>
+    <br/>
+
 - ### <b>Execute tasks</b>
     The following shows how to add tasks and their triggers, so the bot can execute them in the way you want to.<br>
     The dictionary with the required information looks like this:
-    ```
+    ```python
     task_dict = {
         "Redirecting to Google...": "do_google_search",
         "Date and Time": "do_current_date_and_time",
@@ -204,12 +239,12 @@ In the following all these parts are gonna be explained, that you know how to mo
     <br/>
     The other entries are working the same way. In case a function needs parameters to work, obtained from the user-input, that handling take place in the [get information](#get-information) part. <br>
     Implemented and shown examples are <b>weather, wikipediaSearch and google</b>.
-    <br/><br/><br/>
+    <br/><br/>
 
 - ### <b>Direct responses</b>
     This part is all about handling behavior in case a specific response has been send last and the user replied something that should be handled in a different way.<br>
     The dictionary with the required information looks like this:
-    ```
+    ```python
     direct_response_dict = {
         "wrongAnswer": ("wrongAnswerResponse",["wikipediaSearch"]),
         "anotherJoke": ("jokes",["jokes"])
@@ -221,7 +256,7 @@ In the following all these parts are gonna be explained, that you know how to mo
     In case the determined tag(class) the bot has predicted is ``"wrongAnswer"``, the bot is gonna to check if the last entry in his memory is ``["wikipediaSearch"]``.<br>
     If thats true, the bot sets ``"wrongAnswerResponse"`` as new tag(class) to chose a response from.<br>
     If not, the previous determined tag(class) stays and the bot choses the response from there.<br>
-    The dictionaries with the required information looks like this:
+    The intents are looking like this:
     <table>
     <tr>
     <th>predicted tag(class)</th>
@@ -266,7 +301,7 @@ In the following all these parts are gonna be explained, that you know how to mo
     In case the determined tag(class) the bot has predicted is ``"anotherJoke"``, the bot is gonna to check if the last entry in his memory is ``["jokes"]``.<br>
     If thats true, the bot sets ``"jokes"`` as new tag(class) to chose a response from.<br>
     If not, the previous determined tag(class) stays and the bot choses the response from there.<br>
-    The dictionaries with the required information looks like this:
+    The intents are looking like this:
     <table>
     <tr>
     <th>predicted tag(class)</th>
@@ -318,7 +353,53 @@ In the following all these parts are gonna be explained, that you know how to mo
 
     </table>
 
+- ### <b>Direct task with input</b>
+    With this you are able to handle a task right away without predicting a tag(class) by the model, based on the previous response the bot has send.<br>
+    The dictionary with the required information looks like this:
+    ```python
+    direct_task_with_input = {
+        "wrongAnswerResponse": {"wikipediaSearch": "WikiSearch"}
+    }
+    ```
+    The basic pattern is: ``"latestMemoryTag": {"lastButOneMemoryTag": "responseTriggerForTaskDict"}`` <br>
+    <br/>
+    <ins>Let's take a look at the example dictionary entry:</ins> <br>
+    In case the last memory entry is ``"wrongAnswerResponse"`` the bot checks if the one but last memory entry is ``"wikipediaSearch"``. <br>
+    If thats true, the bot imediatly executes the defined task ``"WikiSearch"`` with the complete user-input given. <br>
+    So no other checkups or predictions take place.
+
     <br/>
 
-- ### <b>Direct task with input</b>
-    Test
+- ### <b>Additional content check</b>
+    This part is about handling known mispredictions the bot will make in some cases. <br>
+    The bot addional checks the content of the user-input with the patterns of the predicted tag(class), by using the spacy-similarity-check.<br>
+    In case the highest similarty of the user-input and the patterns is to low, the bot automaticly will set the <b>google</b>-tag, so in the further process the user-input will be handled by the [google-task](#tasks_hopepy). <br>
+    The list with the required information looks like this:
+    ```python
+    spacy_content_check = [
+        "location"
+    ]
+    ```
+    The basic pattern is: ``[tagToCheckAdditional]`` <br>
+    <br/>
+    <ins>Let's take a look at the example entry:</ins> <br>
+    If the predicted tag(class) the bot has made is ``"location"`` an addtional content check about the user-input and the patterns of the ``"location"``-tag will be done.<br>
+    If the hightest similarty, after checking the user-input with all patterns, is to low the <b>google</b>-tag will be set. <br>
+    To give you an concrete example why the ``"location"``-tag is in this list take an look at the intent:
+    ```json
+    {
+        "tag": "location",
+        "patterns": [
+            "where are you?",
+            "where do i find you?"
+        ],
+        "responses": [
+            "I'm here and there.",
+            "You can't find me :)"
+        ]
+    }
+    ```
+    Let the user-input be: <b>Where can i find the Eiffeltower?</b> <br>
+    Knowing the prediction using the model will say that the ``"location"``-tag is the way to go, because there is no specific Eiffeltower-location-intent. <br>
+    So the given responses not really fit, here comes the content check to take place. <br>
+    The highest similarty after checking the user-input with all patterns will be low, so the bot sets the <b>google</b>-tag and the user-input <b>Where can i find the Eiffeltower?</b> will be handled by the google-task. <br>
