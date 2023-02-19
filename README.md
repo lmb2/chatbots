@@ -1,6 +1,10 @@
 # Tensorflow intent-based Chatbot - Hope
 
 **Authors: Laura-Marie Behmenburg, Fabian van Treek**
+
+The Inspration for the Cahtbot was tanken by this [Video](https://www.youtube.com/watch?v=1lwddP0KUEg) and Links zu Websiten einfügen.
+These ideas were used as a basic structure and expanded and adapted with our own features.
+
 ## Installation
 Hier muss der Kram mit der File rein, auch wie man ein Conda umgebung anlegt? Das Python installiert sein muss, sollte ja doch klar sein.
 ### Requirements
