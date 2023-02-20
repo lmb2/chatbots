@@ -109,7 +109,7 @@ An example:
 
 ## Modify behaviors
 
-Behaviors options are defined by dictionaries or lists that determine when it triggers and what do do in the situation. These are:
+Behavior options are defined by dictionaries or lists that determine when it triggers and what do do in the situation. These are:
 - [Get information from user-input](#get-information)
 - [Execute tasks due to user-input](#execute-tasks)
 - [Direct responses based on prior response](#direct-responses)
