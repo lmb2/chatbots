@@ -196,7 +196,7 @@
             "Have a nice day.",
             "Bye! Come back again soon.",
             "So, till next time.",
-            "If you need anything just text me anytime. Bye.",
+            "If you need anything just text me anytime. Bye."
         ]
     },
     {
@@ -309,7 +309,7 @@
             "I will help you, just tell me how.",
             "Ok, what is issue?",
             "Now you need a help? Ok what you are looking for?",
-            "What is your problem?",
+            "What is your problem?"
         ]
     },
     {
@@ -1235,7 +1235,7 @@
             "what to do if i get a Broken Toe?", 
             "Which medicine to take if I get a Broken Toe?", 
             "How to cure Broken Toe?",
-            "My Toe hurts.",
+            "My Toe hurts."
         ],
         "responses": ["1)To help decrease pain and swelling in a broken toe, elevate the foot, ice the injury, and stay off the foot. 2)Depending on the severity of the fracture, the toe may need to be put back into place (reduced), and some compound toe fractures may require surgery.3) Most broken toes heal without complications in six weeks."]
     },
@@ -1491,11 +1491,6 @@
         "tag": "fact-23",
         "patterns": ["What are the different types of mental health professionals?"],
         "responses": ["There are many types of mental health professionals. Finding the right one for you may require some research."]
-    },
-    {
-        "tag": "fact-24",
-        "patterns": ["Where can I go to find a support group?"],
-        "responses": ["Many people find peer support a helpful tool that can aid in their recovery. There are a variety of organizations that offer support groups for consumers, their family members and friends. Some support groups are peer-led, while others may be led by a mental health professional."]
     },
     {
         "tag": "fact-25",
