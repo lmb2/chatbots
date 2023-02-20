@@ -8,9 +8,9 @@ These ideas were used as a basic structure and expanded and adapted with our own
 If you are interested in the programm structure and how things work, you can look [here](Developer.md)
 
 ## Installation
-Hier muss der Kram mit der File rein, auch wie man ein Conda umgebung anlegt? Das Python installiert sein muss, sollte ja doch klar sein.
+The Chatbot mainly based on python.
 ### Requirements
-First a conda environment with necessary dependencies.
+Create a conda environment and install the necessary dependencies.
   ```
   conda create --name chatbot python=3.8
   conda activate chatbot
