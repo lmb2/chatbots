@@ -24,7 +24,7 @@ Create a conda environment and install the necessary dependencies.
 
   ```
 ## Data
-The Chatbot Data, based largely on the file [intents_hope.json](data/intents_hope.json) this file, was merged by hand, by some datasets found on the Internet. In addition, further content was added or changed manually.
+The Chatbot Data, based largely on the file [intents_hope.json](data/intents_hope.json). This file, was merged by hand, by some datasets found on the Internet. In addition, further content was added or changed manually.
 - [Recognition-dataset from Kaggle](https://www.kaggle.com/datasets/elvinagammed/chatbots-intent-recognition-dataset/code)
 - [intents-for-first-aid-recommendations from Kaggle](https://www.kaggle.com/datasets/therealsampat/intents-for-first-aid-recommendations)
 - [mental-health-conversational-data from Kaggle](https://www.kaggle.com/datasets/elvis23/mental-health-conversational-data)
