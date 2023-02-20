@@ -220,7 +220,7 @@
             "Wow",
             "Great!",
             "Good!",
-            "That nice!",
+            "That's nice!",
             "Amazing!"
         ],
         "responses": [
@@ -628,7 +628,6 @@
         "tag": "about me",
         "patterns": [
             "Do you know me?",
-            "Who am I",
             "Tell me about myself",
             "Identify me"
         ],
@@ -642,9 +641,7 @@
         "tag": "creator",
         "patterns": [
             "Who is your creator?",
-            "Who created you",
-            "Who is your father.",
-            "Who is your daddy."
+            "Who created you"
         ],
         "responses": [
             "That would be Laura and Fabian.",
@@ -826,7 +823,8 @@
             "nice to hear"
         ],
         "responses": [
-            "Yeah!"
+            "Yeah!",
+            "Ok"
         ]
     },
     
@@ -1006,8 +1004,8 @@
               "Wasn't speaking to you"
         ],
         "responses": [
-              "OK",
-              "No problem"
+              "OK.",
+              "No problem."
         ]
     },
     {   
