@@ -57,7 +57,8 @@ Schema: "Tag: (newResponseTag,[latestMemoryTagsTriggers])"
 '''
 direct_response_dict = {
     "wrongAnswer": ("wrongAnswerResponse",["wikipediaSearch"]),
-    "anotherJoke": ("jokes",["jokes"])
+    "anotherJoke": ("jokes",["jokes"]),
+    "anotherRiddle": ("riddle",["riddle"])
     }
 
 '''
