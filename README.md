@@ -61,6 +61,7 @@ The user-input and the bot-response will be printed on the screen.
 ```
 python run_gui_hope.py
 ```
+![alt text](gui_example.png)
 
 
 
