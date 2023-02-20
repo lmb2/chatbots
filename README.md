@@ -8,7 +8,11 @@ These ideas were used as a basic structure and expanded and adapted with our own
 ## Installation
 Hier muss der Kram mit der File rein, auch wie man ein Conda umgebung anlegt? Das Python installiert sein muss, sollte ja doch klar sein.
 ### Requirements
-Python Conda, ich weiß gerade nicht was noch und welche Versionen oder egal
+Create conda environment with necessary dependencies.
+  ```
+  conda create --name transformer-chatbot --file requirements.txt
+  conda activate transformer-chatbot
+  ```
 ## Data
 The Chatbot Data, based largely on the file **intents_hope.json** this file, was merged by hand, by some datasets found on the Internet. In addition, further content was added or changed manually.
 - [Recognition-dataset from Kaggle](https://www.kaggle.com/datasets/elvinagammed/chatbots-intent-recognition-dataset/code)
