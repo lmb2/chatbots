@@ -5,16 +5,26 @@
 The Inspration for the Cahtbot was taken by this [Video](https://www.youtube.com/watch?v=1lwddP0KUEg) and [The Basics of building an Artificial Intelligence Chatbot – 2023](https://www.mygreatlearning.com/blog/basics-of-building-an-artificial-intelligence-chatbot/).
 These ideas were used as a basic structure and expanded and adapted with our own features.
 
+If you are interested in the programm structure and how things work, you can look [here](Developer.md)
+
 ## Installation
 Hier muss der Kram mit der File rein, auch wie man ein Conda umgebung anlegt? Das Python installiert sein muss, sollte ja doch klar sein.
 ### Requirements
 First a conda environment with necessary dependencies.
   ```
-  conda create --name transformer-chatbot --file requirements.txt
-  conda activate transformer-chatbot
+  conda create --name chatbot python=3.8
+  conda activate chatbot
+
+  pip install spacy
+  python -m spacy download en_core_web_lg
+  pip install tensorflow
+  pip install wikipedia-api
+  pip install googleapi
+  pip install customtkinter
+
   ```
 ## Data
-The Chatbot Data, based largely on the file **intents_hope.json** this file, was merged by hand, by some datasets found on the Internet. In addition, further content was added or changed manually.
+The Chatbot Data, based largely on the file [intents_hope.json](data/intents_hope.json) this file, was merged by hand, by some datasets found on the Internet. In addition, further content was added or changed manually.
 - [Recognition-dataset from Kaggle](https://www.kaggle.com/datasets/elvinagammed/chatbots-intent-recognition-dataset/code)
 - [intents-for-first-aid-recommendations from Kaggle](https://www.kaggle.com/datasets/therealsampat/intents-for-first-aid-recommendations)
 - [mental-health-conversational-data from Kaggle](https://www.kaggle.com/datasets/elvis23/mental-health-conversational-data)
