@@ -14,7 +14,7 @@
 
 - ### <b>chatting_hope.py</b>
 
-    This is the main-file of the bot. The created model will be used to predict the pattern-tag based on the user-input. The bot then either knows which response to pick or what task to be executed. Some other behavior will be explained [here](#modify-other-behaviors). <br>
+    This is the main-file of the bot. The created model will be used to predict the pattern-tag based on the user-input. The bot then either knows which response to pick or what task to be executed. The behavior options will be explained [here](#modify-behaviors). <br>
     Functions short explained:
     - <b>clean_up_sentence(sentence)</b>: tokenizing and lemmatizing the user-input
     - <b>bag_of_words(sentence)</b>: create a bag-of-words from the user-input
@@ -26,7 +26,7 @@
     - <b>get_last_but_one_memory_tag()</b>: get the last but one memory
     - <b>get_response(message)</b>: main-method for final response generation, task calling and other behavior
     - <b>run_hope()</b>: method to run the bot 
-    - <b>get_bot_response(user_input)</b>: method for the interaction with other bots, used in the [chatbot_moderator_interaktion.py](#chatbot_moderator_interaktionpy)
+    - <b>get_bot_response(user_input)</b>: method to get one answer from bot, used in the [chatbot_moderator_interaktion.py](#chatbot_moderator_interaktionpy) and [run_gui_hope.py](#run_gui_hopepy).
     <p>
 
 
@@ -56,9 +56,6 @@
 
     This file will start the bot with a simple gui, where the user can enter his input within a textfield. <br>
     The user-input and the bot-response will be printed on the screen. 
-    ```
-    python run_gui_hope.py
-    ```
     <p>
 
 ## Simple programm structure
@@ -112,7 +109,7 @@ An example:
 
 ## Modify behaviors
 
-Other behaviors are defined by dictionaries or lists that determine when it triggers and what do do in the situation. These are:
+Behaviors options are defined by dictionaries or lists that determine when it triggers and what do do in the situation. These are:
 - [Get information from user-input](#get-information)
 - [Execute tasks due to user-input](#execute-tasks)
 - [Direct responses based on prior response](#direct-responses)
