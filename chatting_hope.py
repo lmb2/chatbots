@@ -136,7 +136,7 @@ Prüfen/Herausfinden für welche Klasse(Tag) die Eingabe zutrifft/passend ist
 '''
 def predict_class(sentence):
     bow = bag_of_words(sentence)
-    res = model.predict(np.array([bow]))[0]
+    res = model.predict(np.array([bow]),verbose=0)[0]
     ERROR_THRESHOLD = 0.3 #Welche Überstimmung mindestens vorhaden sein muss
     results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True) #Sortierung das höchste Wahrscheinlichkeit an erster Stelle steht
