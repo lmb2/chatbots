@@ -5,7 +5,7 @@
 The Inspration for the Cahtbot was taken by this [Video](https://www.youtube.com/watch?v=1lwddP0KUEg) and [The Basics of building an Artificial Intelligence Chatbot – 2023](https://www.mygreatlearning.com/blog/basics-of-building-an-artificial-intelligence-chatbot/).
 These ideas were used as a basic structure and expanded and adapted with our own features.
 
-If you are interested in the programm structure and how things work, you can look [here](Developer.md).
+If you are interested in the program structure and how things work, you can look [here](Developer.md).
 
 ## Installation
 The Chatbot mainly based on python.
