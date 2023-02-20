@@ -42,12 +42,11 @@ Me:
 Now the bot is running and you can talk with him.
 
 #### <b>run_gui_hope.py</b>
-
-    This file will start the bot with a simple gui, where the user can enter his input within a textfield. <br>
-    The user-input and the bot-response will be printed on the screen. 
-    ```
-    python run_gui_hope.py
-    ```
+This file will start the bot with a simple gui, where the user can enter his input within a textfield. <br>
+The user-input and the bot-response will be printed on the screen. 
+```
+python run_gui_hope.py
+```
 
 
 
