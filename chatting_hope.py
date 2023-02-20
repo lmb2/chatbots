@@ -77,7 +77,8 @@ Liste mit den Tags welche beim Triggern zusätzlich mit Spacy abgeglichen werden
         => google_serach trigger
 '''
 spacy_content_check = [
-    "location"
+    "location",
+    "fact-21"
     ]
 
 ignore_letters = ['?', '!', '.', ',']
@@ -126,7 +127,7 @@ def content_pattern_check(predicted_class,sentence):
             if simi > highest_similartiy:
                 highest_similartiy = simi
         
-        if highest_similartiy < 0.7:
+        if highest_similartiy < 0.9:
             return True
         else:
             return False
