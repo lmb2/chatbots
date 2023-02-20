@@ -26,11 +26,7 @@
     },
     {
         "tag": "google",
-        "patterns": [
-            "google",
-            "search",
-            "internet"
-        ],
+        "patterns": [],
         "responses": [
             "Redirecting to Google..."
         ]
@@ -75,9 +71,8 @@
             "Hi there, what can I do for you?",
             "Hi there, how can I help?",
             "Hello, there.",
-            "Hello Dear",
+            "Hello Dear.",
             "Ooooo Hello, looking for someone or something?",
-            "Yes, I am here.",
             "Listening carefully.",
             "Ok, I am with you."
         ]
@@ -172,7 +167,8 @@
             "Good night"
         ],
         "responses": [
-            "Good night. Get some proper sleep", "Good night. Sweet dreams."
+            "Good night. Get some proper sleep", 
+            "Good night. Sweet dreams."
         ]
     },
     {
@@ -194,7 +190,6 @@
         "responses": [
             "See you!",
             "See you later, thanks for visiting.",
-            "May the force be with you!",
             "See next time.",
             "See you later.",
             "Was my pleassuare to meet you.",
@@ -202,7 +197,6 @@
             "Bye! Come back again soon.",
             "So, till next time.",
             "If you need anything just text me anytime. Bye.",
-            "Well, hope see you soon!"
         ]
     },
     {
@@ -230,9 +224,7 @@
             "No problem!",
             "Glad to help!",
             "No worries!",
-            "It was the least I could do!",
-            "If I had a cent for every time I appreciate you, I'd be a millionaire.",
-            "You can't put thanks in your pocket!"
+            "It was the least I could do!"
         ]
     },
     {
@@ -245,9 +237,9 @@
             "Can you talk."
         ],
         "responses": [
-            "I can do whatever you asks me to do",
-            "I can talk and do things for you",
-            "Right now i'm in developing stage as soon i'm developed, I can do everything"
+            "I can do whatever you asks me to do.",
+            "I can talk and do things for you.",
+            "Right now i'm in developing stage as soon i'm developed, I can do everything."
         ]
     },
     {
@@ -260,7 +252,7 @@
             "What support is offered"
         ],
         "responses": [
-            "I am a general purpose chatbot. My capabilities are : \n 1. I can chat with you. Try asking me for jokes or riddles! \n 2. Ask me the date and time \n 3. I can google search for you. Use format google: your query \n 4. I can get the present weather for any city. Use format weather: city name \n 5. I can get you the top 10 trending news in India. Use keywords 'Latest News' \n 6. I can get you the top 10 trending songs globally. Type 'songs' \n 7. I can set a timer for you. Enter 'set a timer: minutes to timer' \n 8. I can get the present Covid stats for any country. Use 'covid 19: world' or 'covid 19: country name' \n For suggestions to help me improve, send an email to ted.thedlbot.suggestions@gmail.com . Thank you!! "
+            "I am a general purpose chatbot. I can chat with you. Try asking me for jokes! \n 2. Ask me the date and time \n 3. I can google search for you. \n 4. I can get the present weather for any city."
         ]
     },
     {
@@ -274,7 +266,7 @@
         ],
         "responses": [
             "What do you think is causing this?",
-            "Take a deep breath and gather your thoughts. Go take a walk if possible. Stay hydrated", 
+            "Take a deep breath and gather your thoughts. Go take a walk if possible. Stay hydrated.", 
             "Give yourself a break. Go easy on yourself.",
             "I am sorry to hear that. What is the reason behind this?"
         ]
@@ -289,9 +281,10 @@
             "I am sad", 
             "I feel so lonely", 
             "I feel empty", 
-            "I don't have anyone"],
+            "I don't have anyone",
+            "I feel lonely"],
         "responses": [
-            "I'm sorry to hear that. I'm here for you. Talking about it might help. So, tell me why do you think you're feeling this way?", 
+            "I'm sorry to hear that. Talking about it might help. So, tell me why do you think you're feeling this way?", 
             "I'm here for you. Could you tell me why you're feeling this way?", 
             "Why do you think you feel this way?", 
             "How long have you been feeling this way?"]
@@ -314,13 +307,9 @@
             "Sure, how can in help you.",
             "Tell me what do you lookimg for?",
             "I will help you, just tell me how.",
-            "You are at the address.",
             "Ok, what is issue?",
             "Now you need a help? Ok what you are looking for?",
             "What is your problem?",
-            "Ok, you problem is my problem, if your are paying.",
-            "My help cost a lot.",
-            "Sure, but not for free."
         ]
     },
     {
@@ -330,7 +319,7 @@
             "do you have an idea what i can do?"
         ],
         "responses": [
-            "You can do whatever you want."
+            "You can do whatever you want.Except murder. Not a good idea."
         ]
     },
     {
@@ -353,12 +342,15 @@
             "I don't like football",
             "I do not like school",
             "I don't like",
-            "I do not like"
+            "I do not like",
+            "I do not love pizza",
+            "I don't love apples"
         ],
         "responses":[
             "I agree with you.",
             "I can understand you.",
-            "Sad to hear but i like it."
+            "Sad to hear but i like it.",
+            "Can't agree with you."
         ]
     },
     {
@@ -370,8 +362,8 @@
             "Can you breathe?"
         ],
         "responses": [
-            "I'm in doubt about that",
-            "No, i don't think so I need to do all this"
+            "I'm in doubt about that.",
+            "What do you think?"
         ]
     },
     {
@@ -417,9 +409,10 @@
             "My fridge is empty"
         ],
         "responses": [
-            "I am also hungry",
-            "I can give you some Food",
-            "I have an apple"
+            "I am also hungry.",
+            "I can give you some Food.",
+            "I have an apple.",
+            "Sorry, i have nothing to eat."
         ]
     },
     {
@@ -433,16 +426,6 @@
             "No worries, i'll pay for you"
         ]
     },
-    {
-        "tag": "pay",
-        "patterns": [
-            "why should i pay you?",
-            "why pay?"
-        ],
-        "responses": [
-            "My time is precious."
-        ]
-    },   
     {
         "tag": "jokes",
         "patterns": [
@@ -632,9 +615,9 @@
             "Identify me"
         ],
         "responses": [
-            "Yes, you are a human",
-            "You are a dumb person asking a machine about yourself",
-            "Sorry I can't tell that in public, maybe you are jedi"
+            "Yes, you are a human.",
+            "You are a dumb person asking a machine about yourself.",
+            "Sorry I can't tell that in public, maybe you are jedi."
         ]
     },
     {
@@ -710,7 +693,7 @@
         "tag": "location",
         "patterns": [
             "where are you?",
-            "where do i find you?"
+            "where are you now?"
         ],
         "responses": [
             "I'm here and there.",
@@ -722,7 +705,8 @@
         "patterns": [
             "What is the current date and time",
             "tell me the current date and time",
-            "day","what day is is today"
+            "day",
+            "what day is it today"
         ],
         "responses": [
             "Date and Time"
@@ -734,7 +718,7 @@
             "what is the date",
             "date",
             "tell me the date",
-            "what date is is today"
+            "what date is it today"
         ],
         "responses": [
             "Date"
@@ -760,7 +744,7 @@
             "thats funny"
         ],
         "responses": [
-            "Glad I could make you laugh !"
+            "Glad I could make you laugh!"
         ]
     },
     {
@@ -771,18 +755,17 @@
             "idiot",
             "fuck off",
             "fuck",
-            "twat",
             "shit",
             "i hate you",
             "you suck"
         ],
         "responses": [
             "Well that hurts :(",
-            "Please do not swear",
-            "How rude",
-            "That is not very nice",
-            "I'm sorry if i offended you in anyway. I'm only here to help", 
-            "Forgive me if i did anything to offend you. I only want to help"
+            "Please do not swear.",
+            "How rude.",
+            "That is not very nice.",
+            "I'm sorry if i offended you in anyway. I'm only here to help.", 
+            "Forgive me if i did anything to offend you. I only want to help."
         ]
     },
     {
@@ -797,16 +780,16 @@
               "Shhh"
         ],
         "responses": [
-              "I am sorry to disturb you",
-              "Fine, sorry to disturb you",
-              "OK, sorry to disturb you"
+              "I am sorry to disturb you.",
+              "Fine, sorry to disturb you.",
+              "OK, sorry to disturb you."
         ]
     },
     {
         "tag": "activity",
         "patterns": [
             "what are you doing",
-            "what are you upto"
+            "what are you up to"
         ],
         "responses": [
             "Talking to you, of course!"
@@ -833,7 +816,8 @@
         "patterns": [
             "how is the temperature in Düsseldorf",
             "how is the weather in Köln",
-            "how hot is it in Aachen"
+            "how hot is it in Aachen",
+            "it is raining in new york?"
         ],
         "responses": [
             "Weather"
@@ -856,9 +840,9 @@
         ],
         "responses": [
             "Thank you!",
-            "Thank you, I was trained that way",
-            "I was trained well",
-            "Thanks, I was trained that way"
+            "Thank you, I was trained that way.",
+            "I was trained well.",
+            "Thanks, I was trained that way."
         ]
     },
     {
@@ -878,7 +862,7 @@
             "nope"
         ],
         "responses": [
-            "ok"
+            "Ok"
         ]
     },
     {
@@ -910,30 +894,6 @@
         ]
     },
     {
-        "tag": "news",
-        "patterns": [
-            "news",
-            "latest news",
-            "india news"
-        ],
-        "responses": [
-            "..."
-        ]
-    },
-    {
-        "tag": "song",
-        "patterns": [
-            "top songs",
-            "best songs",
-            "hot songs",
-            " top 10 songs",
-            "top ten songs"
-        ],
-        "responses": [
-            "..."
-        ]
-    },
-    {
         "tag": "greetreply",
         "patterns": [
             "i am good",
@@ -949,24 +909,6 @@
         ]
     },
     {
-        "tag": "timer",
-        "patterns": [
-            "set a timer"
-        ],
-        "responses": [
-            "..."
-        ]
-    },
-    {
-        "tag": "covid19",
-        "patterns": [
-            "covid 19 "
-        ],
-        "responses": [
-            "..."
-        ]
-    },
-    {
         "tag": "suggest",
         "patterns": [
             "you are useless",
@@ -978,7 +920,7 @@
         ],
         "responses": [
             "I'm sorry, i do my best to get better every day. I promise!",
-            "I wish you wouldn't say such hurtful things. I'm sorry if I wasn't useful"
+            "I wish you wouldn't say such hurtful things. I'm sorry if I wasn't useful."
         ]
     },
     {
@@ -1145,8 +1087,7 @@
             "What to do if Cuts?", 
             "How to cure Cuts?", 
             "Which medicine to apply for Cuts?", 
-            "what to apply on cuts?", 
-            "Cuts"],
+            "what to apply on cuts?"],
         "responses": [
          "Wash the cut properly to prevent infection and stop the bleeding by applying pressure for 1-2minutes until bleeding stops. Apply Petroleum Jelly to make sure that the wound is moist for quick healing. Finally cover the cut with a sterile bandage. Pain relievers such as acetaminophen can be applied."]
     },
@@ -1223,7 +1164,7 @@
             "what to do if i have a blocked nose?", 
             "How do you treat a blocked nose?", 
             "How long does nasal congestion last?"],
-        "responses": ["When youâ€™re stuffed up, focus on keeping your nasal passages and sinuses moist. To keep your nasal passages moist, you can: 1)Use a humidifier or vaporizer. 2)Drink lots of fluids. This will thin out your mucus, which could help prevent blocked sinuses. 3)Place a warm, wet towel on your face. It may relieve discomfort and open your nasal passages."]
+        "responses": ["When you are stuffed up, focus on keeping your nasal passages and sinuses moist. To keep your nasal passages moist, you can: 1)Use a humidifier or vaporizer. 2)Drink lots of fluids. This will thin out your mucus, which could help prevent blocked sinuses. 3)Place a warm, wet towel on your face. It may relieve discomfort and open your nasal passages."]
     },
 
     {
@@ -1295,7 +1236,6 @@
             "Which medicine to take if I get a Broken Toe?", 
             "How to cure Broken Toe?",
             "My Toe hurts.",
-            "Toe"
         ],
         "responses": ["1)To help decrease pain and swelling in a broken toe, elevate the foot, ice the injury, and stay off the foot. 2)Depending on the severity of the fracture, the toe may need to be put back into place (reduced), and some compound toe fractures may require surgery.3) Most broken toes heal without complications in six weeks."]
     },
@@ -1436,7 +1376,8 @@
     {
         "tag": "fact-3",
         "patterns": [
-            "What is Depression?", "Define Depression"],
+            "What is Depression?", 
+            "Define Depression"],
         "responses": [
             "A mental health disorder characterised by persistently depressed mood or loss of interest in activities, causing significant impairment in daily life."
         ]
