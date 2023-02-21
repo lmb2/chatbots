@@ -132,9 +132,9 @@ In the following, all these parts are going to be explained, that you know how t
     The basic pattern is: `` "Tag": ([parameter_name_to_change,splitTrigger],[entity_names_to_check_for]) `` <br>
     <br/>
     <ins>Let's look at the first dictionary entry:</ins> <br>
-    This is gonna get triggered when the bot determines ``"courtesyGreetingResponse"`` as tag(class) to chose a response from. <br>
-    When it's triggered the bot knows that he has to check the user-input by using the spacy-entity-check with the given parameters ``["PERSON","ORG","NORP"]``, because there is no <b>splitTrigger</b> defined. <br>
-    Afterwards the bot replaces the obtained information with the given part that should be replaced: ``["<HUMAN>",""]``. <br>
+    This is going to get triggered when the bot determines ``"courtesyGreetingResponse"`` as tag(class) to choose a response from. <br>
+    When it's triggered, the bot knows that he has to check the user-input by using the spacy-entity-check with the given parameters ``["PERSON","ORG","NORP"]``, because there is no <b>splitTrigger</b> defined. <br>
+    Afterward, the bot replaces the obtained information with the given part that should be replaced: ``["<HUMAN>",""]``. <br>
     The intent part of this example looks like this:
     ```json
     {
@@ -162,9 +162,9 @@ In the following, all these parts are going to be explained, that you know how t
     ```
     <br/><br/>
     <ins>Let's take a look at the second entry:</ins> <br>
-    This get's triggered when the bots determines ``"weather"`` as tag(class) to chose a response from. <br>
-    When it's triggered the bot knows that he has to check the user-input by using the spacy-entity-check with the given parameters ``["PERSON","ORG","GPE","EVENT"]``, because there is no <b>splitTrigger</b> defined. <br>
-    Afterwards the bot uses the obtained information for the next steps. <br>
+    This get's triggered when the bots determines ``"weather"`` as tag(class) to choose a response from. <br>
+    When it's triggered, the bot knows that he has to check the user-input by using the spacy-entity-check with the given parameters ``["PERSON","ORG","GPE","EVENT"]``, because there is no <b>splitTrigger</b> defined. <br>
+    Afterward, the bot uses the obtained information for the next steps. <br>
     The intent part of this example looks like this:
     ```json
     {
@@ -181,9 +181,9 @@ In the following, all these parts are going to be explained, that you know how t
     ```
     <br/><br/>
     <ins>Let's take a look at the third entry:</ins> <br>
-    This get's triggered when the bots determines ``"wikipediaSearch"`` as tag(class) to chose a response from. <br>
+    This get's triggered, when the bots determines ``"wikipediaSearch"`` as tag(class) to choose a response from. <br>
     When it's triggered the bot knows that he has to split the user-input appointed by ``["<>","split"]`` and to split at the given words ``["about","for"]``. <br>
-    Afterwards the bot uses the obtained information for the next steps. <br>
+    Afterward, the bot uses the obtained information for the next steps. <br>
     The intent part of this example looks like this:
     ```json
     {
@@ -201,7 +201,7 @@ In the following, all these parts are going to be explained, that you know how t
     ```
     <br/><br/>
     <ins>Let's take a look at the last entry:</ins><br>
-    This get's triggered when the bot determines ``"google"`` as tag(class) to chose a response from. <br>
+    This get's triggered, when the bot determines ``"google"`` as tag(class) to choose a response from. <br>
     Settled by the ``["<>","pure"]`` the bot knows that he has to use the complete user-input for the next step. <br>
     The intent part of this example looks like this:
     ```json
@@ -239,7 +239,7 @@ In the following, all these parts are going to be explained, that you know how t
     <br/><br/>
 
 - ### <b>Direct responses</b>
-    This part is all about handling behavior in case a specific response has been send last and the user replied something that should be handled in a different way.<br>
+    This part is all about handling behavior in case a specific response has been sent last and the user replied something that should be handled differently.<br>
     The dictionary with the required information looks like this:
     ```python
     direct_response_dict = {
