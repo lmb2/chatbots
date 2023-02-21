@@ -16,14 +16,16 @@ root.geometry("1080x750")
     
 def run(event):
     user_input = e.get()
-    #txt.tag_add("BOLD", "1.0", "end")
-    txt.insert("end","\n"+"Me: "+user_input)
-    #txt.tag_remove("BOLD",  "1.0", 'end')
+    txt.configure(state="normal")
+    txt.insert("end","Me: ","Underline")
+    txt.insert("end",user_input+"\n")
     if user_input=="exit":
         root.destroy()
     else:
         bot_answer = get_bot_response(user_input)
-        txt.insert("end","\n"+"Hope: "+bot_answer)
+        txt.insert("end","Hope: ","Underline")
+        txt.insert("end", bot_answer+"\n")
+        txt.configure(state="disabled")
         txt.see("end")
         e.delete(0,"end")
     
@@ -31,13 +33,13 @@ def run(event):
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
-label = customtkinter.CTkLabel(master=frame, text="Chat System")
+label = customtkinter.CTkLabel(master=frame, text="Chat with Hope")
 label.pack(pady=12, padx=10)
 
 txt = customtkinter.CTkTextbox(master=frame, width=800, height=450)
 txt.pack(pady=12, padx=10)
-#txt.configure(state="disabled")
-#txt.tag_configure("BOLD", font=customtkinter.CTkFont(size=20, weight="bold"))
+txt.configure(state="disabled")
+txt.tag_config("Underline",underline=1)
 
 scrollbar = customtkinter.CTkScrollbar(master=txt, command=txt.yview)
 scrollbar.grid(row=0, column=1, sticky="ns")
@@ -48,7 +50,7 @@ e = customtkinter.CTkEntry(master=frame,placeholder_text="Enter you message", wi
 e.pack(pady=12, padx= 10)
 e.bind('<Return>', run)
 
-label2 = customtkinter.CTkLabel(master=frame, text='Type "exit" to Close')
+label2 = customtkinter.CTkLabel(master=frame,text='Type "exit" to Close', text_color="orange")
 label2.pack(pady=12, padx=10)
 
 root.mainloop()
