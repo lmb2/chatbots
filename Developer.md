@@ -60,7 +60,7 @@
 
 ## Simple programm structure
 
-This shows in a simple way, how the bot come to an answer. Beginnig with den <b>User-Input(1.)</b> until the <b>Return for the output(8.)</b>. 
+This shows, in a simple way, how the bot come to an answer. Beginning with den <b>User-Input(1.)</b> until the <b>Return for the output(8.)</b>. 
 
     1. User-input
     2. Check if the last response in memory triggers a direct_task
