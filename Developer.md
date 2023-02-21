@@ -66,7 +66,7 @@ This shows, in a simple way, how the bot come to an answer. Beginning with den <
     2. Check if the last response in memory triggers a direct_task
         - If True: handle direct_task -> will be final bot response
         - If False: go further
-    3. Predict the tag(class) from user-input by using the model, afterwards a reponse from the respones will be chosen randomly
+    3. Predict the tag(class) from user-input by using the model, afterward a response from the responses will be chosen randomly
         - The prediction process includes setting the google-Tag if necessary
     4. Check if the predicted tag(class) triggers the get_information
         - If True: handle get_information -> evantually change a part in chosen response | execute a task -> will be final bot response
