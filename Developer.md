@@ -250,9 +250,9 @@ In the following, all these parts are going to be explained, that you know how t
     The basic pattern is: ``"Tag": (newResponseTag,[latestMemoryTagsTriggers])`` <br>
     <br/>
     <ins>Let's look at the first dictionary entry:</ins> <br>
-    In case the determined tag(class) the bot has predicted is ``"wrongAnswer"``, the bot is gonna to check if the last entry in his memory is ``["wikipediaSearch"]``.<br>
-    If thats true, the bot sets ``"wrongAnswerResponse"`` as new tag(class) to chose a response from.<br>
-    If not, the previous determined tag(class) stays and the bot choses the response from there.<br>
+    In case the determined tag(class) the bot has predicted is ``"wrongAnswer"``, the bot is going to check if the last entry in his memory is ``["wikipediaSearch"]``.<br>
+    If thats true, the bot sets ``"wrongAnswerResponse"`` as new tag(class) to choose a response from.<br>
+    If not, the previous determined tag(class) stays and the bot chooses the response from there.<br>
     The intents are looking like this:
     <table>
     <tr>
@@ -295,9 +295,9 @@ In the following, all these parts are going to be explained, that you know how t
     <br/>
 
     <ins>Let's take a look at the second entry:</ins> <br>
-    In case the determined tag(class) the bot has predicted is ``"anotherJoke"``, the bot is gonna to check if the last entry in his memory is ``["jokes"]``.<br>
-    If thats true, the bot sets ``"jokes"`` as new tag(class) to chose a response from.<br>
-    If not, the previous determined tag(class) stays and the bot choses the response from there.<br>
+    In case the determined tag(class) the bot has predicted is ``"anotherJoke"``, the bot is going to check if the last entry in his memory is ``["jokes"]``.<br>
+    If thats true, the bot sets ``"jokes"`` as new tag(class) to choose a response from.<br>
+    If not, the previous determined tag(class) stays and the bot chooses the response from there.<br>
     The intents are looking like this:
     <table>
     <tr>
@@ -351,7 +351,7 @@ In the following, all these parts are going to be explained, that you know how t
     </table>
 
 - ### <b>Direct task with input</b>
-    With this you are able to handle a task right away without predicting a tag(class) by the model, based on the previous response the bot has send.<br>
+    With this, you are able to handle a task right away without predicting a tag(class) by the model, based on the previous response the bot has sent.<br>
     The dictionary with the required information looks like this:
     ```python
     direct_task_with_input = {
@@ -369,8 +369,8 @@ In the following, all these parts are going to be explained, that you know how t
 
 - ### <b>Additional content check</b>
     This part is about handling known mispredictions the bot will make in some cases. <br>
-    The bot addional checks the content of the user-input with the patterns of the predicted tag(class), by using the spacy-similarity-check.<br>
-    In case the highest similarty of the user-input and the patterns is to low, the bot automaticly will set the <b>google</b>-tag, so in the further process the user-input will be handled by the [google-task](#tasks_hopepy). <br>
+    The bot additional checks the content of the user-input with the patterns of the predicted tag(class), by using the spacy-similarity-check.<br>
+    In case the highest similarity of the user-input and the patterns is too low, the bot automatically will set the <b>google</b>-tag, so in the further process the user-input will be handled by the [google-task](#tasks_hopepy). <br>
     The list with the required information looks like this:
     ```python
     spacy_content_check = [
@@ -380,9 +380,9 @@ In the following, all these parts are going to be explained, that you know how t
     The basic pattern is: ``[tagToCheckAdditional]`` <br>
     <br/>
     <ins>Let's take a look at the example entry:</ins> <br>
-    If the predicted tag(class) the bot has made is ``"location"`` an addtional content check about the user-input and the patterns of the ``"location"``-tag will be done.<br>
-    If the hightest similarty, after checking the user-input with all patterns, is to low the <b>google</b>-tag will be set. <br>
-    To give you an concrete example why the ``"location"``-tag is in this list take an look at the intent:
+    If the predicted tag(class) the bot has made is ``"location"`` an additional content check about the user-input and the patterns of the ``"location"``-tag will be done.<br>
+    If the hightest similarity, after checking the user-input with all patterns, is to low the <b>google</b>-tag will be set. <br>
+    To give you a concrete example why the ``"location"``-tag is in this list, take a look at the intent:
     ```json
     {
         "tag": "location",
@@ -399,4 +399,4 @@ In the following, all these parts are going to be explained, that you know how t
     Let the user-input be: <b>Where can i find the Eiffeltower?</b> <br>
     Knowing the prediction using the model will say that the ``"location"``-tag is the way to go, because there is no specific Eiffeltower-location-intent. <br>
     So the given responses not really fit, here comes the content check to take place. <br>
-    The highest similarty after checking the user-input with all patterns will be low, so the bot sets the <b>google</b>-tag and the user-input <b>Where can i find the Eiffeltower?</b> will be handled by the google-task. <br>
+    The highest similarity after checking the user-input with all patterns will be low, so the bot sets the <b>google</b>-tag and the user-input <b>Where can i find the Eiffeltower?</b> will be handled by the google-task. <br>
