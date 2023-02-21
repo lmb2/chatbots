@@ -82,7 +82,7 @@ This shows, in a simple way, how the bot come to an answer. Beginning with den <
 
 ## Modify intents
 
-To add,change or delete parts of the intents you need to unterstand the structure. Each intent is seperated in a <b>tag(class)</b> that describes the content in a simple way, a <b>list of patterns</b> which are the trigger for the bot and a <b>list of responses</b> from which the bot will pick a response. <br>
+To add, change or delete parts of the intents you need to understand the structure. Each intent is separated in a <b>tag(class)</b> that describes the content in a simple way, a <b>list of patterns</b> which are the trigger for the bot and a <b>list of responses</b> from which the bot will pick a response. <br>
 An example:
 ```json
     {
@@ -109,14 +109,14 @@ An example:
 
 ## Modify behaviors
 
-Behavior options are defined by dictionaries or lists that determine when it triggers and what do do in the situation. These are:
+Behavior options are defined by dictionaries or lists that determine when it triggers and what to do in the situation. These are:
 - [Get information from user-input](#get-information)
 - [Execute tasks due to user-input](#execute-tasks)
 - [Direct responses based on prior response](#direct-responses)
 - [Direct task with user-input based on prior response](#direct-task-with-input)
 - [Additional content check to avoid known mispredictions](#additional-content-check)
 
-In the following all these parts are gonna be explained, that you know how to modify them or add your own entries.
+In the following, all these parts are going to be explained, that you know how to modify them or add your own entries.
 
 - ### <b>Get information</b>
     This shows you multiple ways to get information out of the user-input. Using a dictionary filled with the parameters needed.<br>
