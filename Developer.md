@@ -9,7 +9,7 @@
 
 - ### <b>training_hope.py</b>
 
-    In this file a Tensorflow-keras model is trained by using the [intents-file](data/intents_hope.json). First each pattern is gonna to be tokenized and lemmatized, this data is set in relation to the respective pattern-tag. While iterating through all patterns there are gonna be two list created. One with all words, duplicates gonna be deleted, and one with all tags(classes). Then bag-of-words(bow) are created for each tokenized and lemmatized pattern. The bow and the respective tag(class) of the created bow are the data which are given to the model to train.
+    In this file a Tensorflow-keras model is trained by using the [intents-file](data/intents_hope.json). First each pattern is gonna to be tokenized and lemmatized, this data is set in relation to the respective pattern-tag. While iterating through all patterns there are going to be two list created. One with all words, duplicates going to be deleted, and one with all tags(classes). Then bag-of-words(bow) are created for each tokenized and lemmatized pattern. The bow and the respective tag(class) of the created bow are the data which are given to the model to train.
 
 
 - ### <b>chatting_hope.py</b>
